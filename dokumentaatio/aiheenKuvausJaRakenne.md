@@ -6,3 +6,4 @@
 
 - pelin käynnistäminen
 - pelaaminen
+- pelin tallennus
