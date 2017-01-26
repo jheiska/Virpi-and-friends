@@ -1,12 +1,16 @@
 package virpi.virpigame;
-
+import virpi.virpigame.ui.TextUI;
 
 
 public class Main {
 
     
     public static void main(String[] args) {
-        System.out.println("Tästä se lähtee");
+        TextUI kayttoliittyma = new TextUI();
+        kayttoliittyma.start();
+        
     }
+    
+   
     
 }
