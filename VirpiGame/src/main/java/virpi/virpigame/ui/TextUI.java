@@ -2,6 +2,7 @@ package virpi.virpigame.ui;
 
 import java.util.Scanner;
 import virpi.virpigame.objects.Kissa;
+import virpi.virpigame.objects.Ruoka;
 
 public class TextUI {
 
@@ -17,11 +18,16 @@ public class TextUI {
         System.out.println("Tervetuloa kissapeliin Virpi and friends!");
         System.out.print("Anna kissalle nimi: ");
         Kissa virpi = new Kissa(lukija.nextLine(), 0, kartta.haeAloitusRuutu());
-        kartta.lisaaKissa(virpi);
+        kartta.lisaaLiikkuva(virpi);
+        Ruoka ruoka1 = new Ruoka("Latz", 3, 3);
+        Ruoka ruoka2 = new Ruoka("Whiskas", 10, 10);
+        kartta.lisaaLiikkuva(ruoka1);
+        kartta.lisaaLiikkuva(ruoka2);
 
+        //ensimmäiset liikkumiset - pelihahmon liikuttelua ylös ja alas, oikealle ja vasemmalle
         while (true) {
             kartta.tulostaKartta();
-            System.out.print("Liiku ylös tai alas (y/a) tai lopeta: ");
+            System.out.print("Liiku ylös, alas, oikea tai vasen (y/a/o/v) tai lopeta: ");
             String komento = lukija.nextLine();
             if (komento.equals("lopeta")) {
                 break;
@@ -29,8 +35,12 @@ public class TextUI {
                 kartta.liikutaYlos(virpi);
             } else if (komento.equals("a") || komento.equals("alas")) {
                 kartta.liikutaAlas(virpi);
+            } else if (komento.equals("o") || komento.equals("oikea")) {
+                kartta.liikutaOikealle(virpi);
+            } else if (komento.equals("v") || komento.equals("vasen")) {
+                kartta.liikutaVasemmalle(virpi);
             } else {
-                System.out.println("Virheellinen komento, anna ylös, alas, y, a tai lopeta.");
+                System.out.println("Virheellinen komento, anna ylös, y,  alas, a, oikea, o, vasen, v tai lopeta.");
             }
             System.out.println("");
         }

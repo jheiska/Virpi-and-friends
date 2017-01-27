@@ -8,7 +8,7 @@ public class Kissa implements Liikkuva {
     private String nimi;
 
     public Kissa(String nimi, int x, int y) {
-        this.x = x;        
+        this.x = x;
         this.y = y;
         this.nimi = nimi;
     }
@@ -24,6 +24,16 @@ public class Kissa implements Liikkuva {
     }
 
     @Override
+    public void liikuOikealle() {
+        this.x++;
+    }
+
+    @Override
+    public void liikuVasemmalle() {
+        this.x--;
+    }
+
+    @Override
     public int getX() {
         return x;
     }
@@ -35,18 +45,8 @@ public class Kissa implements Liikkuva {
 
     @Override
     public String toString() {
-        //return this.nimi + " on kaistalla " + this.y;
-        return "V";
-    }
+        return this.nimi + " on kaistalla " + this.y;
 
-    @Override
-    public void liikuOikealle() {
-        this.x++;
-    }
-
-    @Override
-    public void liikuVasemmalle() {
-        this.x--;
     }
 
 }

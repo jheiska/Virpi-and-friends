@@ -5,13 +5,12 @@ public class Ruoka implements Liikkuva {
     private String nimi;
     private int x;
     private int y;
-    private int points;
 
-    public Ruoka(String name, int x, int y, int points) {
+    public Ruoka(String name, int x, int y) {
         this.nimi = name;
         this.x = x;
         this.y = y;
-        this.points = points;
+
     }
 
     @Override
@@ -28,7 +27,7 @@ public class Ruoka implements Liikkuva {
     public void liikuOikealle() {
         this.x++;
     }
-    
+
     @Override
     public void liikuVasemmalle() {
         this.x--;
@@ -48,12 +47,9 @@ public class Ruoka implements Liikkuva {
         return x;
     }
 
-    public int getPoints() {
-        return points;
-    }
-
+    @Override
     public String toString() {
-        return "R";
+        return this.nimi + " on sijainnissa (" + this.x + "," + this.y + ")";
     }
 
 }
