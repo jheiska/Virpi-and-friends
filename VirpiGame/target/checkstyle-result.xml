@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.11.2">
+<file name="C:\Users\jaakk_000\Documents\GitHub\Virpi-and-friends\VirpiGame\src\main\java\virpi\virpigame\Main.java">
+</file>
+<file name="C:\Users\jaakk_000\Documents\GitHub\Virpi-and-friends\VirpiGame\src\main\java\virpi\virpigame\objects\Kartta.java">
+</file>
+<file name="C:\Users\jaakk_000\Documents\GitHub\Virpi-and-friends\VirpiGame\src\main\java\virpi\virpigame\objects\Kissa.java">
+</file>
+<file name="C:\Users\jaakk_000\Documents\GitHub\Virpi-and-friends\VirpiGame\src\main\java\virpi\virpigame\objects\Liikkuva.java">
+</file>
+<file name="C:\Users\jaakk_000\Documents\GitHub\Virpi-and-friends\VirpiGame\src\main\java\virpi\virpigame\objects\Ruoka.java">
+</file>
+<file name="C:\Users\jaakk_000\Documents\GitHub\Virpi-and-friends\VirpiGame\src\main\java\virpi\virpigame\ui\TextUI.java">
+</file>
+</checkstyle>
