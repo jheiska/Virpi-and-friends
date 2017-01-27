@@ -15,7 +15,9 @@ public class Ruoka implements Liikkuva {
 
     @Override
     public void liikuYlos() {
-        this.y--;
+        if (this.y > 0) {
+            this.y--;
+        }
     }
 
     @Override
@@ -30,11 +32,9 @@ public class Ruoka implements Liikkuva {
 
     @Override
     public void liikuVasemmalle() {
-        this.x--;
-    }
-
-    public String getName() {
-        return nimi;
+        if (this.x > 0) {
+            this.x--;
+        }
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Ruoka implements Liikkuva {
 
     @Override
     public String toString() {
-        return this.nimi + " on sijainnissa (" + this.x + "," + this.y + ")";
+        return this.nimi;
     }
 
 }

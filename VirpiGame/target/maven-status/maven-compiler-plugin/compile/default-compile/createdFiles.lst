@@ -3,4 +3,4 @@ virpi\virpigame\objects\Liikkuva.class
 virpi\virpigame\objects\Ruoka.class
 virpi\virpigame\ui\TextUI.class
 virpi\virpigame\Main.class
-virpi\virpigame\ui\Kartta.class
+virpi\virpigame\objects\Kartta.class

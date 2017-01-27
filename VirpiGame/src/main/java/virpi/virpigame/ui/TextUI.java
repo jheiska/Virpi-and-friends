@@ -1,5 +1,6 @@
 package virpi.virpigame.ui;
 
+import virpi.virpigame.objects.Kartta;
 import java.util.Scanner;
 import virpi.virpigame.objects.Kissa;
 import virpi.virpigame.objects.Ruoka;

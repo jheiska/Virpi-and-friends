@@ -15,7 +15,9 @@ public class Kissa implements Liikkuva {
 
     @Override
     public void liikuYlos() {
-        this.y--;
+        if (this.y > 0) {
+            this.y--;
+        }
     }
 
     @Override
@@ -30,7 +32,9 @@ public class Kissa implements Liikkuva {
 
     @Override
     public void liikuVasemmalle() {
-        this.x--;
+        if (this.x > 0) {
+            this.x--;
+        }
     }
 
     @Override
@@ -45,7 +49,7 @@ public class Kissa implements Liikkuva {
 
     @Override
     public String toString() {
-        return this.nimi + " on kaistalla " + this.y;
+        return this.nimi;
 
     }
 

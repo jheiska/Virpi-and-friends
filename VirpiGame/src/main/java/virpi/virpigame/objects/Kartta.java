@@ -1,4 +1,4 @@
-package virpi.virpigame.ui;
+package virpi.virpigame.objects;
 
 import virpi.virpigame.objects.*;
 
@@ -13,6 +13,10 @@ public class Kartta {
 
     public Kartta(int korkeus, int leveys) {
         pelialue = new Object[korkeus][leveys];
+    }
+    
+    public Object[][] palautaKartta() {
+        return this.pelialue;
     }
 
     // Pelihahmon aloitusruuduksi ruudukon keskimmäinen "kaista"
@@ -88,6 +92,7 @@ public class Kartta {
         } else {
             return false;
         }
-
     }
+    
+    
 }
