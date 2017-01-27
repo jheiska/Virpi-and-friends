@@ -40,10 +40,7 @@ public class Kartta {
         }
     }
 
-    public void lisaaKissa(Object kissa) {
-        pelialue[this.haeAloitusRuutu()][0] = kissa;
-    }
-
+   
     public void lisaaLiikkuva(Liikkuva asia) {
         if (this.mahtuukoRuudukkoon(asia)) {
             pelialue[asia.getY()][asia.getX()] = asia;

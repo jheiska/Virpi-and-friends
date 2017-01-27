@@ -21,7 +21,7 @@ public class TextUI {
         Kissa virpi = new Kissa(lukija.nextLine(), 0, kartta.haeAloitusRuutu());
         kartta.lisaaLiikkuva(virpi);
         Ruoka ruoka1 = new Ruoka("Latz", 3, 3);
-        Ruoka ruoka2 = new Ruoka("Whiskas", 10, 10);
+        Ruoka ruoka2 = new Ruoka("Whiskas", 15, 2);
         kartta.lisaaLiikkuva(ruoka1);
         kartta.lisaaLiikkuva(ruoka2);
 
