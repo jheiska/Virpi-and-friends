@@ -2,24 +2,28 @@ package virpi.virpigame.objects;
 
 public class Kartta {
 
-    private Object[][] pelialue;
+    private Liikkuva[][] pelialue;
     private Kissa virpi;
-    
+
     // Luodaan ruudukko, joko oletusarvoilla 5x30 tai erikseen annetuilla mitoilla. Parametrina pelihahmon nimi ja mahdolliset mitat.
     public Kartta() {
-        pelialue = new Object[5][30];        
+        pelialue = new Liikkuva[5][30];
     }
 
     public Kartta(int korkeus, int leveys) {
-        pelialue = new Object[korkeus][leveys];
+        pelialue = new Liikkuva[korkeus][leveys];
     }
-    
-    public void lisaaPelihahmo(String nimi){
+
+    public void lisaaPelihahmo(String nimi) {
         this.virpi = new Kissa(nimi, 0, this.haeAloitusRuutu());
         this.lisaaLiikkuva(virpi);
     }
-    
-    public Object[][] palautaKartta() {
+
+    public Kissa palautaPelihahmo() {
+        return this.virpi;
+    }
+
+    public Liikkuva[][] palautaKartta() {
         return this.pelialue;
     }
 
@@ -29,22 +33,20 @@ public class Kartta {
     }
 
     // Tulostetaan pelialue, tyhjiin ruutuihin _ 
-    // Objectien ruutuihin toStringin ensimmäinen merkki
+    // Liikkuvien ruutuihin toStringin ensimmäinen merkki
     public void tulostaKartta() {
-        for (Object[] objects : pelialue) {
-            for (Object object : objects) {
-                if (object == null) {
+        for (Liikkuva[] liikkuvat : pelialue) {
+            for (Liikkuva liikkuva : liikkuvat) {
+                if (liikkuva == null) {
                     System.out.print("_");
                 } else {
-                    System.out.print(object.toString().charAt(0));
+                    System.out.print(liikkuva.toString().charAt(0));
                 }
             }
             System.out.print("\n");
-
         }
     }
 
-   
     public void lisaaLiikkuva(Liikkuva asia) {
         if (this.mahtuukoRuudukkoon(asia)) {
             pelialue[asia.getY()][asia.getX()] = asia;
@@ -60,8 +62,8 @@ public class Kartta {
             this.lisaaLiikkuva(asia);
         }
     }
-    
-    public void liikutaHahmoaYlos(){
+
+    public void liikutaHahmoaYlos() {
         this.liikutaYlos(virpi);
     }
 
@@ -72,8 +74,8 @@ public class Kartta {
             this.lisaaLiikkuva(asia);
         }
     }
-    
-    public void liikutaHahmoaAlas(){
+
+    public void liikutaHahmoaAlas() {
         this.liikutaAlas(virpi);
     }
 
@@ -84,8 +86,8 @@ public class Kartta {
             this.lisaaLiikkuva(asia);
         }
     }
-    
-    public void liikutaHahmoaOikealle(){
+
+    public void liikutaHahmoaOikealle() {
         this.liikutaOikealle(virpi);
     }
 
@@ -96,7 +98,7 @@ public class Kartta {
             this.lisaaLiikkuva(asia);
         }
     }
-    
+
     public void liikutaHahmoaVasemmalle() {
         this.liikutaVasemmalle(virpi);
     }
@@ -110,22 +112,17 @@ public class Kartta {
             return false;
         }
     }
-    
-//    public void paivitaKartta() {
-//        //otetaan pelihahmon sijainti talteen, ettei vahingossa poisteta sitä kartalta
-//        for (Object[] objects : pelialue) {
-//            for (Object object : objects) {
-//                if (object.equals(Kissa)) {
-//                    System.out.print("_");
-//                } else {
-//                    System.out.print(object.toString().charAt(0));
-//                }
-//            }
-//            
-//        }
-//    }
-    
-    
-    
-    
+
+    public void paivitaKartta() {
+        pelialue[virpi.getY()][virpi.getX()] = null;
+        for (Liikkuva[] liikkuvat : pelialue) {
+            for (Liikkuva liikkuva : liikkuvat) {
+                if (liikkuva != null) {
+                    this.liikutaVasemmalle(liikkuva);
+                }
+            }
+        }
+        this.lisaaLiikkuva(virpi);
+    }
+
 }

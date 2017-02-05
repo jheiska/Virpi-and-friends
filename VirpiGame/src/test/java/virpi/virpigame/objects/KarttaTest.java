@@ -67,10 +67,9 @@ public class KarttaTest {
     }
 
     @Test
-    public void kartanTulostusToimiiParillaLiikkuvalla() {
+    public void kartanTulostusToimiiHahmollaJaSapuskalla() {
         Kartta kartta = new Kartta(3, 4);
-        Kissa virpi = new Kissa("Virpi", 0, kartta.haeAloitusRuutu());
-        kartta.lisaaLiikkuva(virpi);
+        kartta.lisaaPelihahmo("Virpi");        
         Ruoka ruoka = new Ruoka("Latz", 2, 1);
         kartta.lisaaLiikkuva(ruoka);
         ByteArrayOutputStream tuloste = new ByteArrayOutputStream();
@@ -80,21 +79,36 @@ public class KarttaTest {
     }
 
     @Test
+    public void pelihahmonLiikutteluToimii() {
+        kartta.lisaaPelihahmo("Virpi");
+        assertEquals(kartta.palautaPelihahmo(), kartta.palautaKartta()[2][0]);
+        kartta.liikutaHahmoaOikealle();
+        assertEquals(kartta.palautaPelihahmo(), kartta.palautaKartta()[2][1]);
+        kartta.liikutaHahmoaOikealle();
+        assertEquals(kartta.palautaPelihahmo(), kartta.palautaKartta()[2][2]);
+        kartta.liikutaHahmoaVasemmalle();
+        assertEquals(kartta.palautaPelihahmo(), kartta.palautaKartta()[2][1]);
+        kartta.liikutaHahmoaAlas();
+        assertEquals(kartta.palautaPelihahmo(), kartta.palautaKartta()[3][1]);
+        kartta.liikutaHahmoaYlos();
+        assertEquals(kartta.palautaPelihahmo(), kartta.palautaKartta()[2][1]);
+        kartta.liikutaHahmoaVasemmalle();
+        assertEquals(kartta.palautaPelihahmo(), kartta.palautaKartta()[2][0]);
+    }
+    
+    @Test
     public void liikkuvienSijoitusJaLiikutteluToimii() {
-        Kissa virpi = new Kissa("Virpi", 0, kartta.haeAloitusRuutu());
-        kartta.lisaaLiikkuva(virpi);
         Ruoka ruoka = new Ruoka("Latz", 2, 1);
         kartta.lisaaLiikkuva(ruoka);
-        assertEquals(virpi, kartta.palautaKartta()[2][0]);
         assertEquals(ruoka, kartta.palautaKartta()[1][2]);
-        kartta.liikutaOikealle(virpi);
         kartta.liikutaVasemmalle(ruoka);
-        assertEquals(virpi, kartta.palautaKartta()[2][1]);
         assertEquals(ruoka, kartta.palautaKartta()[1][1]);
-        kartta.liikutaAlas(virpi);
+        kartta.liikutaOikealle(ruoka);
+        assertEquals(ruoka, kartta.palautaKartta()[1][2]);
         kartta.liikutaYlos(ruoka);
-        assertEquals(virpi, kartta.palautaKartta()[3][1]);
-        assertEquals(ruoka, kartta.palautaKartta()[0][1]);
+        assertEquals(ruoka, kartta.palautaKartta()[0][2]);
+        kartta.liikutaAlas(ruoka);
+        assertEquals(ruoka, kartta.palautaKartta()[1][2]);
     }
     
     public void liikutusUlosLaudaltaEiOnnistu() {

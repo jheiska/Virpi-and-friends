@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="0" name="virpi.virpigame.objects.KarttaTest" time="0.17" errors="0" skipped="0">
+<testsuite tests="7" failures="0" name="virpi.virpigame.objects.KarttaTest" time="0.34" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_91\jre\bin"/>
@@ -44,7 +44,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_91\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 clean install"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 test"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -61,10 +61,11 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="virpi.virpigame.objects.KarttaTest" name="customKonstruktoriLuoOikeanKokoisenOletusKartan" time="0.004"/>
+  <testcase classname="virpi.virpigame.objects.KarttaTest" name="customKonstruktoriLuoOikeanKokoisenOletusKartan" time="0.012"/>
+  <testcase classname="virpi.virpigame.objects.KarttaTest" name="pelihahmonLiikutteluToimii" time="0"/>
   <testcase classname="virpi.virpigame.objects.KarttaTest" name="konstruktoriLuoOikeanKokoisenOletusKartan" time="0"/>
-  <testcase classname="virpi.virpigame.objects.KarttaTest" name="kartanTulostusToimiiParillaLiikkuvalla" time="0"/>
   <testcase classname="virpi.virpigame.objects.KarttaTest" name="liikkuvienSijoitusJaLiikutteluToimii" time="0"/>
   <testcase classname="virpi.virpigame.objects.KarttaTest" name="oikeaAloitusRuutu" time="0"/>
-  <testcase classname="virpi.virpigame.objects.KarttaTest" name="tyhjanKartanTulostusToimii" time="0"/>
+  <testcase classname="virpi.virpigame.objects.KarttaTest" name="kartanTulostusToimiiHahmollaJaSapuskalla" time="0"/>
+  <testcase classname="virpi.virpigame.objects.KarttaTest" name="tyhjanKartanTulostusToimii" time="0.001"/>
 </testsuite>

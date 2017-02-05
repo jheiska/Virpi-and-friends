@@ -16,8 +16,17 @@ public class TextUI {
     public void start() {
         Kartta kartta = new Kartta();
         System.out.println("Tervetuloa kissapeliin Virpi and friends!");
-        System.out.print("Anna kissalle nimi, eka kirjain on hahmosi kartalla:");        
-        kartta.lisaaPelihahmo(lukija.nextLine());
+        
+        System.out.print("Anna kissalle nimi (tyhjällä Virpi), eka kirjain on hahmosi kartalla:");        
+        String nimi = lukija.nextLine();
+        if (nimi.equals("")){
+            kartta.lisaaPelihahmo("Virpi");
+        } else {
+            kartta.lisaaPelihahmo(nimi);
+        }
+
+            
+        
         
         Ruoka ruoka1 = new Ruoka("Latz", 3, 3);
         Ruoka ruoka2 = new Ruoka("Whiskas", 15, 2);
@@ -27,7 +36,8 @@ public class TextUI {
         //ensimmäiset liikkumiset - pelihahmon liikuttelua ylös ja alas, oikealle ja vasemmalle
         while (true) {
             kartta.tulostaKartta();
-            System.out.print("Liiku ylös, alas, oikea tai vasen (y/a/o/v) tai lopeta: ");
+            System.out.println("Liiku ylös, alas, oikea tai vasen (y/a/o/v)");
+            System.out.print("Tyhjällä tai virheellisillä komennoilla pysyt paikallasi, lopeta lopettaa pelin:");
             String komento = lukija.nextLine();
             if (komento.equals("lopeta")) {
                 break;
@@ -39,10 +49,9 @@ public class TextUI {
                 kartta.liikutaHahmoaOikealle();
             } else if (komento.equals("v") || komento.equals("vasen")) {
                 kartta.liikutaHahmoaVasemmalle();
-            } else {
-                System.out.println("Virheellinen komento, anna ylös, y,  alas, a, oikea, o, vasen, v tai lopeta.");
-            }
+            } 
             System.out.println("");
+            kartta.paivitaKartta();
         }
     }
 
