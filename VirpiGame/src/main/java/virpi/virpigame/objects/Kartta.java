@@ -35,7 +35,7 @@ public class Kartta {
                     System.out.print(object.toString().charAt(0));
                 }
             }
-            System.out.println("");
+            System.out.print("\n");
 
         }
     }
