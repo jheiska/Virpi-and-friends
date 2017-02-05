@@ -9,4 +9,4 @@ Pelaaja voi valita erilaisista hahmoista, joilla on erilaisia ominaisuuksia liit
 - pelaaminen
 - pelin tallennus
 
-![Luokkakaavio](luokkakaavio.png)
+![Luokkakaavio](luokkakaavio2.png)
