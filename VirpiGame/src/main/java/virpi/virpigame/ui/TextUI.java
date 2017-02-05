@@ -14,12 +14,11 @@ public class TextUI {
     }
 
     public void start() {
-        Kartta kartta = new Kartta(5, 30);
-
+        Kartta kartta = new Kartta();
         System.out.println("Tervetuloa kissapeliin Virpi and friends!");
-        System.out.print("Anna kissalle nimi: ");
-        Kissa virpi = new Kissa(lukija.nextLine(), 0, kartta.haeAloitusRuutu());
-        kartta.lisaaLiikkuva(virpi);
+        System.out.print("Anna kissalle nimi, eka kirjain on hahmosi kartalla:");        
+        kartta.lisaaPelihahmo(lukija.nextLine());
+        
         Ruoka ruoka1 = new Ruoka("Latz", 3, 3);
         Ruoka ruoka2 = new Ruoka("Whiskas", 15, 2);
         kartta.lisaaLiikkuva(ruoka1);
@@ -33,13 +32,13 @@ public class TextUI {
             if (komento.equals("lopeta")) {
                 break;
             } else if (komento.equals("y") || komento.equals("ylös")) {
-                kartta.liikutaYlos(virpi);
+                kartta.liikutaHahmoaYlos();
             } else if (komento.equals("a") || komento.equals("alas")) {
-                kartta.liikutaAlas(virpi);
+                kartta.liikutaHahmoaAlas();
             } else if (komento.equals("o") || komento.equals("oikea")) {
-                kartta.liikutaOikealle(virpi);
+                kartta.liikutaHahmoaOikealle();
             } else if (komento.equals("v") || komento.equals("vasen")) {
-                kartta.liikutaVasemmalle(virpi);
+                kartta.liikutaHahmoaVasemmalle();
             } else {
                 System.out.println("Virheellinen komento, anna ylös, y,  alas, a, oikea, o, vasen, v tai lopeta.");
             }

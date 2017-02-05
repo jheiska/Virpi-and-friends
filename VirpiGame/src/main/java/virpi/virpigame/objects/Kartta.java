@@ -1,18 +1,22 @@
 package virpi.virpigame.objects;
 
-import virpi.virpigame.objects.*;
-
 public class Kartta {
 
     private Object[][] pelialue;
-
-    // Luodaan ruudukko, joko oletusarvoilla 5x30 tai erikseen annetuilla mitoilla
+    private Kissa virpi;
+    
+    // Luodaan ruudukko, joko oletusarvoilla 5x30 tai erikseen annetuilla mitoilla. Parametrina pelihahmon nimi ja mahdolliset mitat.
     public Kartta() {
-        pelialue = new Object[5][30];
+        pelialue = new Object[5][30];        
     }
 
     public Kartta(int korkeus, int leveys) {
         pelialue = new Object[korkeus][leveys];
+    }
+    
+    public void lisaaPelihahmo(String nimi){
+        this.virpi = new Kissa(nimi, 0, this.haeAloitusRuutu());
+        this.lisaaLiikkuva(virpi);
     }
     
     public Object[][] palautaKartta() {
@@ -56,6 +60,10 @@ public class Kartta {
             this.lisaaLiikkuva(asia);
         }
     }
+    
+    public void liikutaHahmoaYlos(){
+        this.liikutaYlos(virpi);
+    }
 
     public void liikutaAlas(Liikkuva asia) {
         if (asia.getY() + 1 < pelialue.length) {
@@ -63,6 +71,10 @@ public class Kartta {
             asia.liikuAlas();
             this.lisaaLiikkuva(asia);
         }
+    }
+    
+    public void liikutaHahmoaAlas(){
+        this.liikutaAlas(virpi);
     }
 
     public void liikutaOikealle(Liikkuva asia) {
@@ -72,6 +84,10 @@ public class Kartta {
             this.lisaaLiikkuva(asia);
         }
     }
+    
+    public void liikutaHahmoaOikealle(){
+        this.liikutaOikealle(virpi);
+    }
 
     public void liikutaVasemmalle(Liikkuva asia) {
         if (asia.getX() > 0) {
@@ -79,6 +95,10 @@ public class Kartta {
             asia.liikuVasemmalle();
             this.lisaaLiikkuva(asia);
         }
+    }
+    
+    public void liikutaHahmoaVasemmalle() {
+        this.liikutaVasemmalle(virpi);
     }
 
     public boolean mahtuukoRuudukkoon(Liikkuva asia) {
@@ -90,6 +110,22 @@ public class Kartta {
             return false;
         }
     }
+    
+//    public void paivitaKartta() {
+//        //otetaan pelihahmon sijainti talteen, ettei vahingossa poisteta sitä kartalta
+//        for (Object[] objects : pelialue) {
+//            for (Object object : objects) {
+//                if (object.equals(Kissa)) {
+//                    System.out.print("_");
+//                } else {
+//                    System.out.print(object.toString().charAt(0));
+//                }
+//            }
+//            
+//        }
+//    }
+    
+    
     
     
 }
