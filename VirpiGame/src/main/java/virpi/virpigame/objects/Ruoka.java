@@ -3,11 +3,13 @@ package virpi.virpigame.objects;
 public class Ruoka implements Liikkuva {
 
     private String nimi;
+    private int pisteet;
     private int x;
     private int y;
 
-    public Ruoka(String name, int x, int y) {
+    public Ruoka(String name, int pisteet, int x, int y) {
         this.nimi = name;
+        this.pisteet = pisteet;
         this.x = x;
         this.y = y;
 
@@ -38,13 +40,26 @@ public class Ruoka implements Liikkuva {
     }
 
     @Override
-    public int getY() {
-        return y;
+    public int getPisteet() {
+        return this.pisteet;
+    }
+
+    @Override
+    public void muutaPisteita(int muutos) {
+        pisteet += muutos;
+        if (pisteet < 0) {
+            pisteet = 0;
+        }
     }
 
     @Override
     public int getX() {
         return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 
     @Override

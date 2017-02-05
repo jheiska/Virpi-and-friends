@@ -24,26 +24,11 @@ public class RuokaTest {
 
     @Before
     public void setUp() {
-        ruoka = new Ruoka("Sapuska", 2, 3);
+        ruoka = new Ruoka("Sapuska", 100, 2, 3);
     }
 
     @After
     public void tearDown() {
-    }
-
-    @Test
-    public void toStringPalauttaaOikeanNimen() {
-        assertEquals("Sapuska", ruoka.toString());
-    }
-
-    @Test
-    public void palauttaaOikeanXKoordinaatin() {
-        assertEquals(2, ruoka.getX());
-    }
-
-    @Test
-    public void palauttaaOikeanYKoordinaatin() {
-        assertEquals(3, ruoka.getY());
     }
 
     @Test
@@ -65,6 +50,12 @@ public class RuokaTest {
     }
 
     @Test
+    public void liikkuuOikealle() {
+        ruoka.liikuOikealle();
+        assertEquals(3, ruoka.getX());
+    }
+
+    @Test
     public void liikkuuVasemmalleEikaMeneNegatiiviseksi() {
         ruoka.liikuVasemmalle();
         assertEquals(1, ruoka.getX());
@@ -75,8 +66,32 @@ public class RuokaTest {
     }
 
     @Test
-    public void liikkuuOikealle() {
-        ruoka.liikuOikealle();
-        assertEquals(3, ruoka.getX());
+    public void palauttaaOikeatPisteet() {
+        assertEquals(100, ruoka.getPisteet());
+    }
+
+    @Test
+    public void pisteetMuuttuvatOikeinEikäMeneNegatiiviseksi() {
+        ruoka.muutaPisteita(300);
+        assertEquals(400, ruoka.getPisteet());
+        ruoka.muutaPisteita(-500);
+        assertEquals(0, ruoka.getPisteet());
+        ruoka.muutaPisteita(-1);
+        assertEquals(0, ruoka.getPisteet());
+    }
+
+    @Test
+    public void palauttaaOikeanXKoordinaatin() {
+        assertEquals(2, ruoka.getX());
+    }
+
+    @Test
+    public void palauttaaOikeanYKoordinaatin() {
+        assertEquals(3, ruoka.getY());
+    }
+
+    @Test
+    public void toStringPalauttaaOikeanNimen() {
+        assertEquals("Sapuska", ruoka.toString());
     }
 }

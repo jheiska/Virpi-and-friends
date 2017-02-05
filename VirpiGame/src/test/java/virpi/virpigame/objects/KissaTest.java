@@ -33,21 +33,6 @@ public class KissaTest {
     }
 
     @Test
-    public void toStringPalauttaaOikeanNimen() {
-        assertEquals("Virpi", kissa.toString());
-    }
-
-    @Test
-    public void palauttaaOikeanXKoordinaatin() {
-        assertEquals(1, kissa.getX());
-    }
-
-    @Test
-    public void palauttaaOikeanYKoordinaatin() {
-        assertEquals(2, kissa.getY());
-    }
-
-    @Test
     public void liikkuuYlosEikaMeneNegatiiviseksi() {
         kissa.liikuYlos();
         assertEquals(1, kissa.getY());
@@ -64,6 +49,12 @@ public class KissaTest {
     }
 
     @Test
+    public void liikkuuOikealle() {
+        kissa.liikuOikealle();
+        assertEquals(2, kissa.getX());
+    }
+
+    @Test
     public void liikkuuVasemmalleEikaMeneNegatiiviseksi() {
         kissa.liikuVasemmalle();
         assertEquals(0, kissa.getX());
@@ -72,8 +63,32 @@ public class KissaTest {
     }
 
     @Test
-    public void liikkuuOikealle() {
-        kissa.liikuOikealle();
-        assertEquals(2, kissa.getX());
+    public void palauttaaOikeatPisteet() {
+        assertEquals(0, kissa.getPisteet());
+    }
+
+    @Test
+    public void pisteetMuuttuvatOikeinEikäMeneNegatiiviseksi() {
+        kissa.muutaPisteita(300);
+        assertEquals(300, kissa.getPisteet());
+        kissa.muutaPisteita(-100);
+        assertEquals(200, kissa.getPisteet());
+        kissa.muutaPisteita(-201);
+        assertEquals(0, kissa.getPisteet());
+    }
+
+    @Test
+    public void palauttaaOikeanXKoordinaatin() {
+        assertEquals(1, kissa.getX());
+    }
+
+    @Test
+    public void palauttaaOikeanYKoordinaatin() {
+        assertEquals(2, kissa.getY());
+    }
+
+    @Test
+    public void toStringPalauttaaOikeanNimen() {
+        assertEquals("X", kissa.toString());
     }
 }

@@ -13,4 +13,8 @@ public interface Liikkuva {
     int getX();
 
     int getY();
+    
+    int getPisteet();
+    
+    void muutaPisteita(int muutos);
 }

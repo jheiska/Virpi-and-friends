@@ -2,15 +2,16 @@ package virpi.virpigame.objects;
 
 public class Kissa implements Liikkuva {
 
-    // hahmo on aina ruudun vasemmassa laidassa, joten x final. tarvitaan kuitenkin sijainnin vertailuun
+    private String nimi;
+    private int pisteet;
     private int x;
     private int y;
-    private String nimi;
 
     public Kissa(String nimi, int x, int y) {
+        this.nimi = nimi;
         this.x = x;
         this.y = y;
-        this.nimi = nimi;
+        this.pisteet = 0;
     }
 
     @Override
@@ -48,9 +49,22 @@ public class Kissa implements Liikkuva {
     }
 
     @Override
-    public String toString() {
-        return this.nimi;
+    public int getPisteet() {
+        return pisteet;
+    }
 
+    @Override
+    public void muutaPisteita(int muutos) {
+        pisteet += muutos;
+        if (pisteet < 0) {
+            pisteet = 0;
+        }
+    }
+
+    @Override
+    public String toString() {
+        //return this.nimi;
+        return "X";
     }
 
 }

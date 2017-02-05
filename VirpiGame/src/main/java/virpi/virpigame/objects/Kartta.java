@@ -5,7 +5,7 @@ public class Kartta {
     private Liikkuva[][] pelialue;
     private Kissa virpi;
 
-    // Luodaan ruudukko, joko oletusarvoilla 5x30 tai erikseen annetuilla mitoilla. Parametrina pelihahmon nimi ja mahdolliset mitat.
+    // Luodaan ruudukko, joko oletusarvoilla 5x30 tai erikseen annetuilla mitoilla. Parametrina mahdolliset mitat.
     public Kartta() {
         pelialue = new Liikkuva[5][30];
     }
@@ -48,8 +48,15 @@ public class Kartta {
     }
 
     public void lisaaLiikkuva(Liikkuva asia) {
+        int x = asia.getX();
+        int y = asia.getY();
+
         if (this.mahtuukoRuudukkoon(asia)) {
-            pelialue[asia.getY()][asia.getX()] = asia;
+            // jos ruutuun ollaan laittamassa virpiä ja ruudussa on jo jokin asia, virpin pisteet muuttuvat
+            if (asia.equals(virpi) && pelialue[y][x] != null) {                
+                virpi.muutaPisteita(pelialue[y][x].getPisteet());
+            }
+            pelialue[y][x] = asia;
         }
     }
 
@@ -114,7 +121,9 @@ public class Kartta {
     }
 
     public void paivitaKartta() {
+        // poistetaan ensin pelihahmo kartalta
         pelialue[virpi.getY()][virpi.getX()] = null;
+        // liikutetaan kaikkia kartalla olevia asioita pykälä vasemmalle
         for (Liikkuva[] liikkuvat : pelialue) {
             for (Liikkuva liikkuva : liikkuvat) {
                 if (liikkuva != null) {
@@ -122,7 +131,12 @@ public class Kartta {
                 }
             }
         }
+        // lopuksi hahmo takaisin kartalle
         this.lisaaLiikkuva(virpi);
+    }
+    
+    public int virpinPisteet() {
+        return virpi.getPisteet();
     }
 
 }
