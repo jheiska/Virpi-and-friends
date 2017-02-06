@@ -36,7 +36,7 @@ public class Peli {
     public void lisaaKoiria() {
         Koira k1 = new Koira(-200, 20, 4);
         Koira k2 = new Koira(-200, 10, 0);
-        Koira k3 = new Koira(-200, 15, 2);
+        Koira k3 = new Koira(-200, 17, 2);
         Koira k4 = new Koira(-200, 25, 1);
         kartta.lisaaLiikkuva(k1);
         kartta.lisaaLiikkuva(k2);

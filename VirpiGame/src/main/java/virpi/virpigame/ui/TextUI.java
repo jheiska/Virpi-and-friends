@@ -16,7 +16,7 @@ public class TextUI {
                 
         System.out.println("Tervetuloa kissapeliin Virpi and friends!");        
         System.out.println("Kartalla K-kirjaimet ovat koiria, varo niitä!");
-        System.out.println("Muut kirjaimet ovat ruokia, hahmosi on @");
+        System.out.println("Muut kirjaimet ovat ruokia, hahmosi on X");
         System.out.print("Anna kissalle nimi (tyhjällä Virpi): ");        
         String nimi = lukija.nextLine();
         if (nimi.equals("")){
