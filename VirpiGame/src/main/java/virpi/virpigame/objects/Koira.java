@@ -1,6 +1,7 @@
-
 package virpi.virpigame.objects;
 
+import java.awt.Color;
+import java.awt.Graphics;
 
 public class Koira implements Liikkuva {
 
@@ -12,9 +13,8 @@ public class Koira implements Liikkuva {
         this.pisteet = pisteet;
         this.x = x;
         this.y = y;
-    }   
-    
-    
+    }
+
     @Override
     public void liikuYlos() {
         if (this.y > 0) {
@@ -56,12 +56,18 @@ public class Koira implements Liikkuva {
 
     @Override
     public void muutaPisteita(int muutos) {
-        pisteet += muutos;        
+        pisteet += muutos;
     }
 
     @Override
     public String toString() {
         return "K";
 
+    }
+
+    @Override
+    public void piirraLiikkuva(Graphics g) {
+        g.setColor(Color.yellow);
+        g.fillOval(x, y, 20, 20);
     }
 }

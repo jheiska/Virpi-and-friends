@@ -5,15 +5,26 @@ public class Kartta {
     private Liikkuva[][] pelialue;
     private Kissa virpi;
 
-    // Luodaan ruudukko, joko oletusarvoilla 5x30 tai erikseen annetuilla mitoilla. Parametrina mahdolliset mitat.
     public Kartta() {
         pelialue = new Liikkuva[5][30];
     }
 
+    /**
+     * Luodaan ruudukko, joko oletusarvoilla 5x30 tai erikseen annetuilla
+     * mitoilla. Parametrina siis mahdolliset mitat.
+     *
+     * @param korkeus
+     * @param leveys
+     */
     public Kartta(int korkeus, int leveys) {
         pelialue = new Liikkuva[korkeus][leveys];
     }
 
+    /**
+     * Luodaan pelaajan hahmo kartalle ja asetetaan sille koordinaatit
+     *
+     * @param nimi
+     */
     public void lisaaPelihahmo(String nimi) {
         this.virpi = new Kissa(nimi, 0, this.haeAloitusRuutu());
         this.lisaaLiikkuva(virpi);
@@ -27,13 +38,19 @@ public class Kartta {
         return this.pelialue;
     }
 
-    // Pelihahmon aloitusruuduksi ruudukon keskimmäinen "kaista"
+    /**
+     * Pelihahmon aloitusruuduksi ruudukon keskimmäinen "kaista"
+     *
+     * @return
+     */
     public int haeAloitusRuutu() {
         return pelialue.length / 2;
     }
 
-    // Tulostetaan pelialue, tyhjiin ruutuihin _ 
-    // Liikkuvien ruutuihin toStringin ensimmäinen merkki
+    /**
+     * Tulostetaan pelialue, tyhjiin ruutuihin _ Liikkuvien ruutuihin toStringin
+     * ensimmäinen merkki. Lähinnä testailua varten tekstiversiona
+     */
     public void tulostaKartta() {
         for (Liikkuva[] liikkuvat : pelialue) {
             for (Liikkuva liikkuva : liikkuvat) {
@@ -47,21 +64,33 @@ public class Kartta {
         }
     }
 
+    /**
+     * Lisätään ruudukkoon jokin olio, tarkistetaan että sen koordinaatit
+     * sopivat kartalle. Kommenteissa lisää
+     *
+     * @param asia on ruudukkoon lisättävä olio
+     */
     public void lisaaLiikkuva(Liikkuva asia) {
         int x = asia.getX();
         int y = asia.getY();
 
         if (this.mahtuukoRuudukkoon(asia)) {
             // jos ruutuun ollaan laittamassa virpiä ja ruudussa on jo jokin asia, virpin pisteet muuttuvat
-            if (asia.equals(virpi) && pelialue[y][x] != null) {                
+            if (asia.equals(virpi) && pelialue[y][x] != null) {
                 virpi.muutaPisteita(pelialue[y][x].getPisteet());
             }
             pelialue[y][x] = asia;
         }
     }
 
-    // Kaikissa liikuttelukomennoissa tarkistetaan ensin, ettei olla menossa ulos pelialueelta - jos ollaan, ei liikuta ollenkaan,
-    // sitten poistetaan asia "ruudukosta", päivitetään sen koordinaatit ja lisätään se uuteen sijaintiin
+    /**
+     * Kaikissa liikuttelukomennoissa tarkistetaan ensin, ettei olla menossa
+     * ulos pelialueelta - jos ollaan, ei liikuta ollenkaan, sitten poistetaan
+     * asia "ruudukosta", päivitetään sen koordinaatit ja lisätään se uuteen
+     * sijaintiin
+     *
+     * @param asia
+     */
     public void liikutaYlos(Liikkuva asia) {
         if (asia.getY() > 0) {
             pelialue[asia.getY()][asia.getX()] = null;
@@ -120,6 +149,10 @@ public class Kartta {
         }
     }
 
+    /**
+     * Kaikkia kartalla olevia olioita siirretään pykälä vasemmalle.
+     * Kommenteissa tarkennuksia
+     */
     public void paivitaKartta() {
         // poistetaan ensin pelihahmo kartalta
         pelialue[virpi.getY()][virpi.getX()] = null;
@@ -134,9 +167,13 @@ public class Kartta {
         // lopuksi hahmo takaisin kartalle
         this.lisaaLiikkuva(virpi);
     }
-    
+
     public int virpinPisteet() {
         return virpi.getPisteet();
+    }
+
+    public Liikkuva virpi() {
+        return this.virpi;
     }
 
 }

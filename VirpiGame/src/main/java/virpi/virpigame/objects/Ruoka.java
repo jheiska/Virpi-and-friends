@@ -1,5 +1,8 @@
 package virpi.virpigame.objects;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class Ruoka implements Liikkuva {
 
     private String nimi;
@@ -65,6 +68,12 @@ public class Ruoka implements Liikkuva {
     @Override
     public String toString() {
         return this.nimi;
+    }
+
+    @Override
+    public void piirraLiikkuva(Graphics g) {
+        g.setColor(Color.red);
+        g.fillOval(x, y, 20, 20);
     }
 
 }

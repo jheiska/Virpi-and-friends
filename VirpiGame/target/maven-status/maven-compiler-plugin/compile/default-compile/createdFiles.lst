@@ -3,6 +3,7 @@ virpi\virpigame\objects\Liikkuva.class
 virpi\virpigame\ui\TextUI.class
 virpi\virpigame\Main.class
 virpi\virpigame\objects\Koira.class
+virpi\virpigame\ui\Kayttoliittyma.class
 virpi\virpigame\objects\Ruoka.class
 virpi\virpigame\objects\Kartta.class
 virpi\virpigame\Peli.class

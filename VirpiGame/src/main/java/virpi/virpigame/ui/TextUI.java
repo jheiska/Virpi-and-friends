@@ -13,17 +13,17 @@ public class TextUI {
 
     public void start() {
         Peli peli = new Peli();
-                
-        System.out.println("Tervetuloa kissapeliin Virpi and friends!");        
+
+        System.out.println("Tervetuloa kissapeliin Virpi and friends!");
         System.out.println("Kartalla K-kirjaimet ovat koiria, varo niitä!");
         System.out.println("Muut kirjaimet ovat ruokia, hahmosi on X");
-        System.out.print("Anna kissalle nimi (tyhjällä Virpi): ");        
+        System.out.print("Anna kissalle nimi (tyhjällä Virpi): ");
         String nimi = lukija.nextLine();
-        if (nimi.equals("")){
+        if (nimi.equals("")) {
             peli.aloita("Virpi");
         } else {
             peli.aloita(nimi);
-        }        
+        }
 
         //ensimmäiset liikkumiset - pelihahmon liikuttelua ylös ja alas, oikealle ja vasemmalle
         while (true) {
@@ -42,9 +42,9 @@ public class TextUI {
                 peli.getKartta().liikutaHahmoaOikealle();
             } else if (komento.equals("v") || komento.equals("vasen")) {
                 peli.getKartta().liikutaHahmoaVasemmalle();
-            } 
+            }
             System.out.println("");
-            
+
             // kartta päivittyy joka komennon päätteeksi
             peli.getKartta().paivitaKartta();
         }
