@@ -1,5 +1,7 @@
 package virpi.virpigame.objects;
 
+import java.awt.Graphics;
+
 public class Kartta {
 
     private Liikkuva[][] pelialue;
@@ -65,6 +67,22 @@ public class Kartta {
     }
 
     /**
+     *
+     * @param g
+     */
+    public void piirraOliot(Graphics g) {
+        for (Liikkuva[] liikkuvat : pelialue) {
+            for (Liikkuva liikkuva : liikkuvat) {
+                if (liikkuva != null) {
+                    liikkuva.piirraLiikkuva(g);
+                }
+
+            }
+
+        }
+    }
+
+    /**
      * Lisätään ruudukkoon jokin olio, tarkistetaan että sen koordinaatit
      * sopivat kartalle. Kommenteissa lisää
      *
@@ -99,6 +117,10 @@ public class Kartta {
         }
     }
 
+    /**
+     *
+     * Pelihahmolle on omat liikuttelukomennot helpottamaan asioita.
+     */
     public void liikutaHahmoaYlos() {
         this.liikutaYlos(virpi);
     }
@@ -139,6 +161,12 @@ public class Kartta {
         this.liikutaVasemmalle(virpi);
     }
 
+    /**
+     * Testataan mahtuvatko parametrina annetun liikkuvan koordinaatit karttaan
+     *
+     * @param asia
+     * @return
+     */
     public boolean mahtuukoRuudukkoon(Liikkuva asia) {
         int x = asia.getX();
         int y = asia.getY();

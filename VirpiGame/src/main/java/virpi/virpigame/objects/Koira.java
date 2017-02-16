@@ -68,6 +68,6 @@ public class Koira implements Liikkuva {
     @Override
     public void piirraLiikkuva(Graphics g) {
         g.setColor(Color.yellow);
-        g.fillOval(x, y, 20, 20);
+        g.fillOval(x * 20, y * 20, 20, 20);
     }
 }

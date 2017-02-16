@@ -7,34 +7,17 @@ import virpi.virpigame.objects.*;
 public class Peli extends JPanel {
 
     private Kartta kartta;
-    private Ruoka sapuska;
-    private Koira jali;
 
     /**
-     * Konstruktorissa luodaan uusi Kartta -olio ja tällä hetkellä testailua
-     * varten aloitetaan peli ja luodaan pari muuta liikkuvaa joilla testailla
+     * Konstruktorissa luodaan uusi Kartta -olio ja aloitetaan peli.
+     *
      */
     public Peli() {
         kartta = new Kartta();
-        aloita("Virpi");
-    //    sapuska = new Ruoka("Joo", 100, 20, 10);
-    //    jali = new Koira(200, 3, 20);
+        this.aloita("Virpi");
 
-    }
-
-    public void paintComponent(Graphics g) {
-        kartta.virpi().piirraLiikkuva(g);
-        this.sapuska.piirraLiikkuva(g);
-        this.jali.piirraLiikkuva(g);
-        sleepRefresh();
-    }
-
-    void sleepRefresh() {
-        try {
-            Thread.sleep(500);
-        } catch (Exception e) {
-        }
-        repaint();
+//        sapuska = new Ruoka("Joo", 100, 20, 5);
+//        jali = new Koira(200, 20, 3);
     }
 
     /**
@@ -48,21 +31,38 @@ public class Peli extends JPanel {
         kartta.lisaaPelihahmo(kissanNimi);
     }
 
-    public Kartta getKartta() {
-        return kartta;
+    /**
+     *
+     * Piirretään ja päivitetään kenttää
+     */
+    public void paintComponent(Graphics g) {
+        kartta.piirraOliot(g);
+        kartta.paivitaKartta();
+        sleepRefresh();
     }
 
-    public int getPisteet() {
-        return kartta.virpinPisteet();
+    /**
+     * Odotellaan puoli sekuntia ja piirretään uudestaan
+     */
+    void sleepRefresh() {
+        try {
+            Thread.sleep(500);
+        } catch (Exception e) {
+        }
+        repaint();
+    }
+
+    public Kartta getKartta() {
+        return kartta;
     }
 
     /**
      * luodaan ja lisätään muutamia ruoka -olioita kartalle
      */
     public void lisaaRuokia() {
-        Ruoka ruoka1 = new Ruoka("Latz", 100, 300, 300);
-        Ruoka ruoka2 = new Ruoka("Whiskas", 300, 150, 200);
-        Ruoka ruoka3 = new Ruoka("Royal Canin", 500, 220, 0);
+        Ruoka ruoka1 = new Ruoka("Latz", 100, 3, 3);
+        Ruoka ruoka2 = new Ruoka("Whiskas", 300, 15, 2);
+        Ruoka ruoka3 = new Ruoka("Royal Canin", 500, 22, 0);
         kartta.lisaaLiikkuva(ruoka1);
         kartta.lisaaLiikkuva(ruoka2);
         kartta.lisaaLiikkuva(ruoka3);
