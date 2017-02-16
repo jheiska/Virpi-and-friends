@@ -1,5 +1,6 @@
 package virpi.virpigame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 import virpi.virpigame.objects.*;
@@ -15,9 +16,6 @@ public class Peli extends JPanel {
     public Peli() {
         kartta = new Kartta();
         this.aloita("Virpi");
-
-//        sapuska = new Ruoka("Joo", 100, 20, 5);
-//        jali = new Koira(200, 20, 3);
     }
 
     /**
@@ -33,11 +31,13 @@ public class Peli extends JPanel {
 
     /**
      *
-     * Piirretään ja päivitetään kenttää
+     * Tyhjätään, piirretään ja päivitetään kenttää
      */
     public void paintComponent(Graphics g) {
+        g.setColor(Color.green);
+        g.fillRect(0, 0, 800, 400);
         kartta.piirraOliot(g);
-        kartta.paivitaKartta();
+        kartta.paivitaKartta();        
         sleepRefresh();
     }
 
@@ -54,6 +54,10 @@ public class Peli extends JPanel {
 
     public Kartta getKartta() {
         return kartta;
+    }
+    
+    public int getPisteet() {
+        return this.kartta.virpinPisteet();
     }
 
     /**

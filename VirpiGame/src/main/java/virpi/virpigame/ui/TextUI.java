@@ -27,7 +27,7 @@ public class TextUI {
 
         //ensimmäiset liikkumiset - pelihahmon liikuttelua ylös ja alas, oikealle ja vasemmalle
         while (true) {
-            System.out.println("Sinulla on " + peli.getPisteet() + " pistettä");
+            System.out.println("Sinulla on " + peli.getPisteet()+ " pistettä");
             peli.getKartta().tulostaKartta();
             System.out.println("Liiku ylös, alas, oikea tai vasen (y/a/o/v)");
             System.out.print("Tyhjällä tai virheellisillä komennoilla pysyt paikallasi, lopeta lopettaa pelin:");

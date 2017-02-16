@@ -23,9 +23,9 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Virpi and friends");
+        //       frame.add(new Peli());
+        frame.setPreferredSize(new Dimension(1000, 500));
 
-        //    frame.setPreferredSize(new Dimension(1000, 500));        
-        frame.setSize(800, 400);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -34,9 +34,11 @@ public class Kayttoliittyma implements Runnable {
     }
 
     private void luoKomponentit(Container container) {
-        //JLabel tervehdys = new JLabel("Tervetuloa peliin Virpi and friends!");
+//        //JLabel tervehdys = new JLabel("Tervetuloa peliin Virpi and friends!");
         container.add(new JLabel("Tervetuloa peliin Virpi and friends!"), BorderLayout.NORTH);
-        container.add(new Peli());
+        Peli peli = new Peli();
+        container.add(peli);
+        frame.addKeyListener(new Liikuttaja(peli.getKartta()));
     }
 
     public JFrame getFrame() {

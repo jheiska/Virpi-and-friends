@@ -7,10 +7,6 @@ public class Kartta {
     private Liikkuva[][] pelialue;
     private Kissa virpi;
 
-    public Kartta() {
-        pelialue = new Liikkuva[5][30];
-    }
-
     /**
      * Luodaan ruudukko, joko oletusarvoilla 5x30 tai erikseen annetuilla
      * mitoilla. Parametrina siis mahdolliset mitat.
@@ -18,6 +14,10 @@ public class Kartta {
      * @param korkeus
      * @param leveys
      */
+    public Kartta() {
+        pelialue = new Liikkuva[5][30];
+    }
+
     public Kartta(int korkeus, int leveys) {
         pelialue = new Liikkuva[korkeus][leveys];
     }
@@ -67,7 +67,7 @@ public class Kartta {
     }
 
     /**
-     *
+     *  Piirretään kaikki kartalta löytyvät liikkuvat kutsumalla niiden piirtometodia
      * @param g
      */
     public void piirraOliot(Graphics g) {
@@ -84,7 +84,7 @@ public class Kartta {
 
     /**
      * Lisätään ruudukkoon jokin olio, tarkistetaan että sen koordinaatit
-     * sopivat kartalle. Kommenteissa lisää
+     * sopivat kartalle. Kommenteissa tarkennusta.
      *
      * @param asia on ruudukkoon lisättävä olio
      */
@@ -103,8 +103,8 @@ public class Kartta {
 
     /**
      * Kaikissa liikuttelukomennoissa tarkistetaan ensin, ettei olla menossa
-     * ulos pelialueelta - jos ollaan, ei liikuta ollenkaan, sitten poistetaan
-     * asia "ruudukosta", päivitetään sen koordinaatit ja lisätään se uuteen
+     * ulos pelialueelta - jos ollaan, ei liikuta ollenkaan. Jos liikutaan, poistetaan
+     * liikkuva kartasta, päivitetään sen koordinaatit ja lisätään se uuteen
      * sijaintiin
      *
      * @param asia
@@ -119,7 +119,7 @@ public class Kartta {
 
     /**
      *
-     * Pelihahmolle on omat liikuttelukomennot helpottamaan asioita.
+     * Pelihahmolle on omat liikuttelukomennot helpottamaan asioita ja välttämään sekaannuksia.
      */
     public void liikutaHahmoaYlos() {
         this.liikutaYlos(virpi);
