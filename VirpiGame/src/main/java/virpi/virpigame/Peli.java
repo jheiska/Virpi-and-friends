@@ -37,6 +37,9 @@ public class Peli extends JPanel implements KeyListener {
     public void aloita() {
         this.lisaaRuokia();
         this.lisaaKoiria();
+//         Oikeaan alalaitaan tulostuva objekti ruudun koon testailua varten
+//         Ruoka ruoka4 = new Ruoka("Makkara", 500, 30, 4);
+//         kartta.lisaaLiikkuva(ruoka4);
 
     }
 
@@ -81,12 +84,10 @@ public class Peli extends JPanel implements KeyListener {
     public void lisaaRuokia() {
         Ruoka ruoka1 = new Ruoka("Latz", 100, 3, 3);
         Ruoka ruoka2 = new Ruoka("Whiskas", 300, 15, 2);
-        Ruoka ruoka3 = new Ruoka("Royal Canin", 500, 22, 0);
-        Ruoka ruoka4 = new Ruoka("Makkara", 500, 30, 4);
+        Ruoka ruoka3 = new Ruoka("Royal Canin", 500, 22, 0);       
         kartta.lisaaLiikkuva(ruoka1);
         kartta.lisaaLiikkuva(ruoka2);
-        kartta.lisaaLiikkuva(ruoka3);
-        kartta.lisaaLiikkuva(ruoka4);
+        kartta.lisaaLiikkuva(ruoka3);        
     }
 
     /**
