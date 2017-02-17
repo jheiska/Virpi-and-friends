@@ -9,3 +9,5 @@ Päivä | Tunnit | Kuvaus
 06.02.2017 | 2h | Graafisen puolen ihmettelyä
 08.02.2017 | 2h | Graafisen puolen ihmettelyä
 10.02.2017 | 4h | Graafisen puolen ihmettelyä
+16.02.2017 | 6h | Pallot saatiin rullaamaan ja sitten vielä hahmon liikuttelut
+17.02.2017 | 6h | JavaDoccia, liikuttelun säätöä, aloitusruutua yms.
