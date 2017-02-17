@@ -10,6 +10,12 @@ public class Kissa implements Liikkuva {
     private int x;
     private int y;
 
+    /**    
+     * Luodaan pelihahmona toimiva Kissa-olio.
+     * @param nimi kissalle nimi.
+     * @param x -koordinaatti.
+     * @param y -koordinaatti.
+     */
     public Kissa(String nimi, int x, int y) {
         this.nimi = nimi;
         this.x = x;

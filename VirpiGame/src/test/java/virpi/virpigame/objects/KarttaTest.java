@@ -30,7 +30,6 @@ public class KarttaTest {
     @Before
     public void setUp() {
         peli = new Peli();
-        peli.aloita("Virpi");
         kartta = peli.getKartta();
     }
 
@@ -67,17 +66,16 @@ public class KarttaTest {
         assertEquals("____" + "\n" + "____" + "\n", tuloste.toString());
     }
 
-    @Test
-    public void kartanTulostusToimiiHahmollaJaSapuskalla() {
-        Kartta kartta = new Kartta(3, 4);
-        kartta.lisaaPelihahmo("Virpi");        
-        Ruoka ruoka = new Ruoka("Latz", 100, 2, 1);
-        kartta.lisaaLiikkuva(ruoka);
-        ByteArrayOutputStream tuloste = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(tuloste));
-        kartta.tulostaKartta();
-        assertEquals("____" + "\n" + "X_L_" + "\n" + "____" + "\n", tuloste.toString());
-    }
+//    @Test
+//    public void kartanTulostusToimiiHahmollaJaSapuskalla() {
+//        Kartta kartta = new Kartta(3, 4);          
+//        Ruoka ruoka = new Ruoka("Latz", 100, 2, 1);
+//        kartta.lisaaLiikkuva(ruoka);
+//        ByteArrayOutputStream tuloste = new ByteArrayOutputStream();
+//        System.setOut(new PrintStream(tuloste));
+//        kartta.tulostaKartta();
+//        assertEquals("____" + "\n" + "X_L_" + "\n" + "____" + "\n", tuloste.toString());
+//    }
 
     @Test
     public void pelihahmonLiikutteluToimii() {
@@ -147,34 +145,34 @@ public class KarttaTest {
         assertEquals(true, kartta.mahtuukoRuudukkoon(ruoka8));
     }
 
-//    @Test
-//    public void pelinLuominenOnAsettanutKartalleVirpinJaRuuatJaKoirat(){
-//        assertNotEquals(null, kartta.palautaKartta()[2][0]);
-//        assertNotEquals(null, kartta.palautaKartta()[3][3]);
-//        assertNotEquals(null, kartta.palautaKartta()[2][15]);
-//        assertNotEquals(null, kartta.palautaKartta()[0][22]);
-//        assertNotEquals(null, kartta.palautaKartta()[4][20]);
-//        assertNotEquals(null, kartta.palautaKartta()[0][10]);
-//        assertNotEquals(null, kartta.palautaKartta()[2][15]);
-//        assertNotEquals(null, kartta.palautaKartta()[1][25]);
-//        assertEquals(null, kartta.palautaKartta()[2][2]);
-//    }
-//    
-//    @Test
-//    public void kartanPaivitysToimii() {
-//        kartta.paivitaKartta();
-//        assertNotEquals(null, kartta.palautaKartta()[2][0]);
-//        assertEquals(null, kartta.palautaKartta()[3][3]);
-//        assertNotEquals(null, kartta.palautaKartta()[3][2]);
-//        assertEquals(null, kartta.palautaKartta()[2][15]);
-//        assertNotEquals(null, kartta.palautaKartta()[2][14]);
-//        assertNotEquals(null, kartta.palautaKartta()[0][21]);
-//        assertNotEquals(null, kartta.palautaKartta()[4][19]);
-//        assertNotEquals(null, kartta.palautaKartta()[0][9]);
-//        assertNotEquals(null, kartta.palautaKartta()[2][14]);
-//        assertNotEquals(null, kartta.palautaKartta()[1][24]);
-//        
-//    }
+    @Test
+    public void pelinLuominenOnAsettanutKartalleVirpinJaRuuatJaKoirat(){
+        assertNotEquals(null, kartta.palautaKartta()[2][0]);
+        assertNotEquals(null, kartta.palautaKartta()[3][3]);
+        assertNotEquals(null, kartta.palautaKartta()[2][15]);
+        assertNotEquals(null, kartta.palautaKartta()[0][22]);
+        assertNotEquals(null, kartta.palautaKartta()[4][20]);
+        assertNotEquals(null, kartta.palautaKartta()[0][10]);
+        assertNotEquals(null, kartta.palautaKartta()[2][15]);
+        assertNotEquals(null, kartta.palautaKartta()[1][25]);
+        assertEquals(null, kartta.palautaKartta()[2][2]);
+    }
+    
+    @Test
+    public void kartanPaivitysToimii() {
+        kartta.paivitaKartta();
+        assertNotEquals(null, kartta.palautaKartta()[2][0]);
+        assertEquals(null, kartta.palautaKartta()[3][3]);
+        assertNotEquals(null, kartta.palautaKartta()[3][2]);
+        assertEquals(null, kartta.palautaKartta()[2][15]);
+        assertNotEquals(null, kartta.palautaKartta()[2][14]);
+        assertNotEquals(null, kartta.palautaKartta()[0][21]);
+        assertNotEquals(null, kartta.palautaKartta()[4][19]);
+        assertNotEquals(null, kartta.palautaKartta()[0][9]);
+        assertNotEquals(null, kartta.palautaKartta()[2][14]);
+        assertNotEquals(null, kartta.palautaKartta()[1][24]);
+        
+    }
     
     
     

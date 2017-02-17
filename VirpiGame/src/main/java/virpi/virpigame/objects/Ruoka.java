@@ -10,8 +10,16 @@ public class Ruoka implements Liikkuva {
     private int x;
     private int y;
 
-    public Ruoka(String name, int pisteet, int x, int y) {
-        this.nimi = name;
+    /**
+     * Luodaan sapuskoja kissan syötäväksi.
+     *
+     * @param nimi sapuskan nimi.
+     * @param pisteet sapuskasta saatavat pisteet.
+     * @param x -koordinaatti.
+     * @param y -koordinaatti.
+     */
+    public Ruoka(String nimi, int pisteet, int x, int y) {
+        this.nimi = nimi;
         this.pisteet = pisteet;
         this.x = x;
         this.y = y;

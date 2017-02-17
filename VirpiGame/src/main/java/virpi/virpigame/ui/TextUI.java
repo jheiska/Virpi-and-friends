@@ -2,6 +2,7 @@ package virpi.virpigame.ui;
 
 import java.util.Scanner;
 import virpi.virpigame.Peli;
+import virpi.virpigame.objects.Kissa;
 
 public class TextUI {
 
@@ -17,17 +18,10 @@ public class TextUI {
         System.out.println("Tervetuloa kissapeliin Virpi and friends!");
         System.out.println("Kartalla K-kirjaimet ovat koiria, varo niitä!");
         System.out.println("Muut kirjaimet ovat ruokia, hahmosi on X");
-        System.out.print("Anna kissalle nimi (tyhjällä Virpi): ");
-        String nimi = lukija.nextLine();
-        if (nimi.equals("")) {
-            peli.aloita("Virpi");
-        } else {
-            peli.aloita(nimi);
-        }
 
         //ensimmäiset liikkumiset - pelihahmon liikuttelua ylös ja alas, oikealle ja vasemmalle
         while (true) {
-            System.out.println("Sinulla on " + peli.getPisteet()+ " pistettä");
+            System.out.println("Sinulla on " + peli.getPisteet() + " pistettä");
             peli.getKartta().tulostaKartta();
             System.out.println("Liiku ylös, alas, oikea tai vasen (y/a/o/v)");
             System.out.print("Tyhjällä tai virheellisillä komennoilla pysyt paikallasi, lopeta lopettaa pelin:");

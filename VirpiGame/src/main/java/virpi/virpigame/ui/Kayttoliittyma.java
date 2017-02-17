@@ -14,33 +14,33 @@ import javax.swing.WindowConstants;
 import virpi.virpigame.*;
 
 public class Kayttoliittyma implements Runnable {
-
+    
     private JFrame frame;
-
+    
     public Kayttoliittyma() {
     }
-
+    
     @Override
     public void run() {
         frame = new JFrame("Virpi and friends");
-        //       frame.add(new Peli());
+        Peli peli = new Peli();
         frame.setPreferredSize(new Dimension(1000, 500));
-
+        frame.add(peli);
+        frame.addKeyListener(peli);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        luoKomponentit(frame.getContentPane());
+        
+        //luoKomponentit(frame.getContentPane());
         frame.pack();
     }
-
-    private void luoKomponentit(Container container) {
-//        //JLabel tervehdys = new JLabel("Tervetuloa peliin Virpi and friends!");
-        container.add(new JLabel("Tervetuloa peliin Virpi and friends!"), BorderLayout.NORTH);
-        Peli peli = new Peli();
-        container.add(peli);
-        frame.addKeyListener(new Liikuttaja(peli.getKartta()));
-    }
-
+    
+//    private void luoKomponentit(Container container) {        
+//        container.add(new JLabel("Tervetuloa peliin Virpi and friends. Paina enter aloittaaksesi!"), BorderLayout.NORTH);
+//        Peli peli = new Peli();
+//        container.add(peli);
+//        frame.addKeyListener(peli);
+//    }
+    
     public JFrame getFrame() {
         return frame;
     }

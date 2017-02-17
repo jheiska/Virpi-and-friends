@@ -9,6 +9,12 @@ public class Koira implements Liikkuva {
     private int x;
     private int y;
 
+    /**     
+     * Luodaan koira kissan väisteltäväksi.
+     * @param pisteet koiran (negatiiviset) pisteet
+     * @param x -koordinaatti.
+     * @param y -koordinaatti.
+     */
     public Koira(int pisteet, int x, int y) {
         this.pisteet = pisteet;
         this.x = x;

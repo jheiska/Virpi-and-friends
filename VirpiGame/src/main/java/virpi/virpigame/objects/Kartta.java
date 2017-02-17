@@ -8,50 +8,58 @@ public class Kartta {
     private Kissa virpi;
 
     /**
-     * Luodaan ruudukko, joko oletusarvoilla 5x30 tai erikseen annetuilla
-     * mitoilla. Parametrina siis mahdolliset mitat.
-     *
-     * @param korkeus
-     * @param leveys
+     * Konstruktori luo kartan oletusmitoilla 5 x 30.
      */
     public Kartta() {
         pelialue = new Liikkuva[5][30];
     }
 
+    /**
+     * Luodaan kartta annetuilla mitoilla.
+     *
+     * @param korkeus kartan korkeus eli y-koordinaatit
+     * @param leveys kartan leveys eli x-koordinaatit
+     */
     public Kartta(int korkeus, int leveys) {
         pelialue = new Liikkuva[korkeus][leveys];
     }
 
     /**
-     * Luodaan pelaajan hahmo kartalle ja asetetaan sille koordinaatit
-     *
-     * @param nimi
+     * Asetetaan pelihahmo ja lisätään se kartalle.
+     * @param virpi pelihahmoksi Kissa-olio.
      */
-    public void lisaaPelihahmo(String nimi) {
-        this.virpi = new Kissa(nimi, 0, this.haeAloitusRuutu());
+    public void lisaaPelihahmo(Kissa virpi) {
+        this.virpi = virpi;
         this.lisaaLiikkuva(virpi);
     }
 
+    /**
+     * Haetaan pelihahmo.
+     * @return palauttaa pelihahmona toimivan Kissa-olion.
+     */
     public Kissa palautaPelihahmo() {
         return this.virpi;
     }
 
+    /**
+     * Palautetaan pelikenttä.
+     * @return Liikkuvia sisältävä "array-ruudukko".
+     */
     public Liikkuva[][] palautaKartta() {
         return this.pelialue;
     }
 
     /**
-     * Pelihahmon aloitusruuduksi ruudukon keskimmäinen "kaista"
-     *
-     * @return
+     * Pelihahmon aloitusruuduksi ruudukon keskimmäinen "kaista".
+     * @return aloitusruudun y-koordinaatti.
      */
     public int haeAloitusRuutu() {
         return pelialue.length / 2;
     }
 
     /**
-     * Tulostetaan pelialue, tyhjiin ruutuihin _ Liikkuvien ruutuihin toStringin
-     * ensimmäinen merkki. Lähinnä testailua varten tekstiversiona
+     * Tulostetaan pelialue, tyhjiin ruutuihin _ Liikkuvien ruutuihin toStringin ensimmäinen merkki.
+     * Lähinnä testailua varten tekstiversiona ennen graafisen puolen toteutusta.
      */
     public void tulostaKartta() {
         for (Liikkuva[] liikkuvat : pelialue) {
@@ -67,8 +75,8 @@ public class Kartta {
     }
 
     /**
-     *  Piirretään kaikki kartalta löytyvät liikkuvat kutsumalla niiden piirtometodia
-     * @param g
+     * Piirretään kaikki kartalta löytyvät liikkuvat kutsumalla niiden piirtometodia.
+     * @param g grafiikkaparametri.
      */
     public void piirraOliot(Graphics g) {
         for (Liikkuva[] liikkuvat : pelialue) {
@@ -89,25 +97,22 @@ public class Kartta {
      * @param asia on ruudukkoon lisättävä olio
      */
     public void lisaaLiikkuva(Liikkuva asia) {
-        int x = asia.getX();
-        int y = asia.getY();
-
         if (this.mahtuukoRuudukkoon(asia)) {
             // jos ruutuun ollaan laittamassa virpiä ja ruudussa on jo jokin asia, virpin pisteet muuttuvat
-            if (asia.equals(virpi) && pelialue[y][x] != null) {
-                virpi.muutaPisteita(pelialue[y][x].getPisteet());
+            if (asia.equals(virpi) && pelialue[asia.getY()][asia.getX()] != null) {
+                virpi.muutaPisteita(pelialue[asia.getY()][asia.getX()].getPisteet());
             }
-            pelialue[y][x] = asia;
+            pelialue[asia.getY()][asia.getX()] = asia;
         }
     }
 
     /**
      * Kaikissa liikuttelukomennoissa tarkistetaan ensin, ettei olla menossa
-     * ulos pelialueelta - jos ollaan, ei liikuta ollenkaan. Jos liikutaan, poistetaan
-     * liikkuva kartasta, päivitetään sen koordinaatit ja lisätään se uuteen
-     * sijaintiin
+     * ulos pelialueelta. Jos ollaan, ei liikuta ollenkaan. Jos liikutaan,
+     * poistetaan liikkuva kartasta, päivitetään sen koordinaatit ja lisätään se
+     * uuteen sijaintiin. Tässä mennään ylös.
      *
-     * @param asia
+     * @param asia Liikkuva-olio parametrina.
      */
     public void liikutaYlos(Liikkuva asia) {
         if (asia.getY() > 0) {
@@ -118,13 +123,18 @@ public class Kartta {
     }
 
     /**
-     *
-     * Pelihahmolle on omat liikuttelukomennot helpottamaan asioita ja välttämään sekaannuksia.
+     * Pelihahmolle on omat liikuttelukomennot helpottamaan toteutusta ja
+     * välttämään sekaannuksia.
      */
     public void liikutaHahmoaYlos() {
         this.liikutaYlos(virpi);
     }
 
+    /**
+     * Liikkuva liikkuu alas.
+     *
+     * @param asia on Liikkuva jota liikutetaan.
+     */
     public void liikutaAlas(Liikkuva asia) {
         if (asia.getY() + 1 < pelialue.length) {
             pelialue[asia.getY()][asia.getX()] = null;
@@ -133,10 +143,18 @@ public class Kartta {
         }
     }
 
+    /**
+     * Pelihahmo liikkuu alas.
+     */
     public void liikutaHahmoaAlas() {
         this.liikutaAlas(virpi);
     }
 
+    /**
+     * Liikkuva liikkuu oikealle.
+     *
+     * @param asia on Liikkuva jota liikutetaan.
+     */
     public void liikutaOikealle(Liikkuva asia) {
         if (asia.getX() + 1 < pelialue[0].length) {
             pelialue[asia.getY()][asia.getX()] = null;
@@ -145,10 +163,18 @@ public class Kartta {
         }
     }
 
+    /**
+     * Pelihahmo liikkuu oikealle.
+     */
     public void liikutaHahmoaOikealle() {
         this.liikutaOikealle(virpi);
     }
 
+    /**
+     * Liikkuva liikkuu vasemmalle.
+     *
+     * @param asia on Liikkuva jota liikutetaan.
+     */
     public void liikutaVasemmalle(Liikkuva asia) {
         if (asia.getX() > 0) {
             pelialue[asia.getY()][asia.getX()] = null;
@@ -157,15 +183,18 @@ public class Kartta {
         }
     }
 
+    /**
+     * Pelihahmo liikkuu vasemmalle.
+     */
     public void liikutaHahmoaVasemmalle() {
         this.liikutaVasemmalle(virpi);
     }
 
     /**
-     * Testataan mahtuvatko parametrina annetun liikkuvan koordinaatit karttaan
+     * Testataan mahtuvatko parametrina annetun liikkuvan koordinaatit karttaan.
      *
-     * @param asia
-     * @return
+     * @param asia on Liikkuva jota liikutetaan.
+     * @return boolean mahtuuko vai eikö mahdu
      */
     public boolean mahtuukoRuudukkoon(Liikkuva asia) {
         int x = asia.getX();
@@ -179,7 +208,7 @@ public class Kartta {
 
     /**
      * Kaikkia kartalla olevia olioita siirretään pykälä vasemmalle.
-     * Kommenteissa tarkennuksia
+     * Kommentteina tarkennuksia.
      */
     public void paivitaKartta() {
         // poistetaan ensin pelihahmo kartalta
@@ -196,11 +225,7 @@ public class Kartta {
         this.lisaaLiikkuva(virpi);
     }
 
-    public int virpinPisteet() {
-        return virpi.getPisteet();
-    }
-
-    public Liikkuva virpi() {
+    public Liikkuva getVirpi() {
         return this.virpi;
     }
 

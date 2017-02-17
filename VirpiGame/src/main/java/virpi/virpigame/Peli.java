@@ -2,51 +2,67 @@ package virpi.virpigame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import virpi.virpigame.objects.*;
+import virpi.virpigame.ui.Alkuruutu;
 
-public class Peli extends JPanel {
+public class Peli extends JPanel implements KeyListener {
 
     private Kartta kartta;
+    private Kissa pelihahmo;
+
+    private enum TILA {
+        ALKURUUTU, PELI
+    };
+    private TILA Tila = TILA.ALKURUUTU;
+    private Alkuruutu aloitus;
 
     /**
-     * Konstruktorissa luodaan uusi Kartta -olio ja aloitetaan peli.
-     *
+     * Konstruktorissa luodaan uusi Kartta -olio ja pelihahmo ja aloitetaan
+     * peli.
      */
     public Peli() {
+        aloitus = new Alkuruutu();
         kartta = new Kartta();
-        this.aloita("Virpi");
+        pelihahmo = new Kissa("Virpi", 0, kartta.haeAloitusRuutu());
+        kartta.lisaaPelihahmo(pelihahmo);
+        this.aloita();
     }
 
     /**
-     * luodaan uusi kartta annetulla pelihahmon nimella ja lisäillään asioita
-     *
-     * @param kissanNimi annetaan luotavan pelihahmon nimi parametrina
+     * Pelin aloituskomto kutsuu omia koirien ja ruokien lisäilymetodeita.
      */
-    public void aloita(String kissanNimi) {
+    public void aloita() {
         this.lisaaRuokia();
         this.lisaaKoiria();
-        kartta.lisaaPelihahmo(kissanNimi);
+
     }
 
     /**
+     * Tyhjätään, piirretään ja päivitetään kenttää.
      *
-     * Tyhjätään, piirretään ja päivitetään kenttää
+     * @param g
      */
     public void paintComponent(Graphics g) {
         g.setColor(Color.green);
         g.fillRect(0, 0, 800, 400);
-        kartta.piirraOliot(g);
-        kartta.paivitaKartta();        
+        if (Tila.equals(TILA.PELI)) {
+            kartta.piirraOliot(g);
+            kartta.paivitaKartta();
+        } else if (Tila.equals(TILA.ALKURUUTU)) {
+            aloitus.PiirraAlkuruutu(g);
+        }
         sleepRefresh();
     }
 
     /**
-     * Odotellaan puoli sekuntia ja piirretään uudestaan
+     * Odotellaan ja piirretään uudestaan.
      */
     void sleepRefresh() {
         try {
-            Thread.sleep(500);
+            Thread.sleep(300);
         } catch (Exception e) {
         }
         repaint();
@@ -55,13 +71,13 @@ public class Peli extends JPanel {
     public Kartta getKartta() {
         return kartta;
     }
-    
+
     public int getPisteet() {
-        return this.kartta.virpinPisteet();
+        return this.kartta.getVirpi().getPisteet();
     }
 
     /**
-     * luodaan ja lisätään muutamia ruoka -olioita kartalle
+     * Luodaan ja lisätään muutamia ruoka -olioita kartalle.
      */
     public void lisaaRuokia() {
         Ruoka ruoka1 = new Ruoka("Latz", 100, 3, 3);
@@ -73,7 +89,7 @@ public class Peli extends JPanel {
     }
 
     /**
-     * luodaan ja lisätään muutamia koira -olioita kartalle
+     * Luodaan ja lisätään muutamia koira -olioita kartalle.
      */
     public void lisaaKoiria() {
         Koira k1 = new Koira(-200, 20, 4);
@@ -84,6 +100,33 @@ public class Peli extends JPanel {
         kartta.lisaaLiikkuva(k2);
         kartta.lisaaLiikkuva(k3);
         kartta.lisaaLiikkuva(k4);
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+        if (Tila.equals(TILA.ALKURUUTU) && ke.getKeyCode() == KeyEvent.VK_ENTER) {
+            Tila = TILA.PELI;
+        }
+        if (Tila.equals(TILA.PELI)) {
+            if (ke.getKeyCode() == KeyEvent.VK_LEFT || ke.getKeyCode() == KeyEvent.VK_A) {
+                kartta.liikutaHahmoaVasemmalle();
+            } else if (ke.getKeyCode() == KeyEvent.VK_RIGHT || ke.getKeyCode() == KeyEvent.VK_D) {
+                kartta.liikutaHahmoaOikealle();
+            } else if (ke.getKeyCode() == KeyEvent.VK_UP || ke.getKeyCode() == KeyEvent.VK_W) {
+                kartta.liikutaHahmoaYlos();
+            } else if (ke.getKeyCode() == KeyEvent.VK_DOWN || ke.getKeyCode() == KeyEvent.VK_S) {
+                kartta.liikutaHahmoaAlas();
+            }
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke
+    ) {
     }
 
 }
