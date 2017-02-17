@@ -17,6 +17,9 @@ public class Kayttoliittyma implements Runnable {
     
     private JFrame frame;
     
+    /**
+     * Konstruktori.
+     */
     public Kayttoliittyma() {
     }
     
@@ -24,7 +27,7 @@ public class Kayttoliittyma implements Runnable {
     public void run() {
         frame = new JFrame("Virpi and friends");
         Peli peli = new Peli();
-        frame.setPreferredSize(new Dimension(1000, 500));
+        frame.setPreferredSize(new Dimension(1200, 240));
         frame.add(peli);
         frame.addKeyListener(peli);
         frame.setVisible(true);

@@ -13,10 +13,10 @@ public class Peli extends JPanel implements KeyListener {
     private Kartta kartta;
     private Kissa pelihahmo;
 
-    private enum TILA {
+    private enum Pelitila {
         ALKURUUTU, PELI
     };
-    private TILA Tila = TILA.ALKURUUTU;
+    private Pelitila tila = Pelitila.ALKURUUTU;
     private Alkuruutu aloitus;
 
     /**
@@ -41,18 +41,17 @@ public class Peli extends JPanel implements KeyListener {
     }
 
     /**
-     * Tyhjätään, piirretään ja päivitetään kenttää.
-     *
-     * @param g
+     * Tyhjätään, piirretään ja päivitetään kenttää. Mikäli pelitilana on ALKURUUTU, piirretään alkuruutu.
+     * @param g grafiikkaparametri
      */
     public void paintComponent(Graphics g) {
         g.setColor(Color.green);
-        g.fillRect(0, 0, 800, 400);
-        if (Tila.equals(TILA.PELI)) {
+        g.fillRect(0, 0, 1200, 240);
+        if (tila.equals(Pelitila.PELI)) {
             kartta.piirraOliot(g);
             kartta.paivitaKartta();
-        } else if (Tila.equals(TILA.ALKURUUTU)) {
-            aloitus.PiirraAlkuruutu(g);
+        } else if (tila.equals(Pelitila.ALKURUUTU)) {
+            aloitus.piirraAlkuruutu(g);
         }
         sleepRefresh();
     }
@@ -83,9 +82,11 @@ public class Peli extends JPanel implements KeyListener {
         Ruoka ruoka1 = new Ruoka("Latz", 100, 3, 3);
         Ruoka ruoka2 = new Ruoka("Whiskas", 300, 15, 2);
         Ruoka ruoka3 = new Ruoka("Royal Canin", 500, 22, 0);
+        Ruoka ruoka4 = new Ruoka("Makkara", 500, 30, 4);
         kartta.lisaaLiikkuva(ruoka1);
         kartta.lisaaLiikkuva(ruoka2);
         kartta.lisaaLiikkuva(ruoka3);
+        kartta.lisaaLiikkuva(ruoka4);
     }
 
     /**
@@ -104,10 +105,10 @@ public class Peli extends JPanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent ke) {
-        if (Tila.equals(TILA.ALKURUUTU) && ke.getKeyCode() == KeyEvent.VK_ENTER) {
-            Tila = TILA.PELI;
+        if (tila.equals(Pelitila.ALKURUUTU) && ke.getKeyCode() == KeyEvent.VK_ENTER) {
+            tila = Pelitila.PELI;
         }
-        if (Tila.equals(TILA.PELI)) {
+        if (tila.equals(Pelitila.PELI)) {
             if (ke.getKeyCode() == KeyEvent.VK_LEFT || ke.getKeyCode() == KeyEvent.VK_A) {
                 kartta.liikutaHahmoaVasemmalle();
             } else if (ke.getKeyCode() == KeyEvent.VK_RIGHT || ke.getKeyCode() == KeyEvent.VK_D) {
