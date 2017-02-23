@@ -126,8 +126,9 @@ public class Kartta {
      * Pelihahmolle on omat liikuttelukomennot helpottamaan toteutusta ja
      * välttämään sekaannuksia.
      */
-    public void liikutaHahmoaYlos() {
+    public void liikutaHahmoaYlosJaPiirra(Graphics g) {
         this.liikutaYlos(virpi);
+        virpi.piirraLiikkuva(g);
     }
 
     /**
@@ -146,8 +147,9 @@ public class Kartta {
     /**
      * Pelihahmo liikkuu alas.
      */
-    public void liikutaHahmoaAlas() {
+    public void liikutaHahmoaAlasJaPiirra(Graphics g) {
         this.liikutaAlas(virpi);
+        virpi.piirraLiikkuva(g);
     }
 
     /**
@@ -166,8 +168,9 @@ public class Kartta {
     /**
      * Pelihahmo liikkuu oikealle.
      */
-    public void liikutaHahmoaOikealle() {
+    public void liikutaHahmoaOikealleJaPiirra(Graphics g) {
         this.liikutaOikealle(virpi);
+        virpi.piirraLiikkuva(g);
     }
 
     /**
@@ -176,8 +179,8 @@ public class Kartta {
      * @param asia on Liikkuva jota liikutetaan.
      */
     public void liikutaVasemmalle(Liikkuva asia) {
+        pelialue[asia.getY()][asia.getX()] = null;
         if (asia.getX() > 0) {
-            pelialue[asia.getY()][asia.getX()] = null;
             asia.liikuVasemmalle();
             this.lisaaLiikkuva(asia);
         }
@@ -186,8 +189,9 @@ public class Kartta {
     /**
      * Pelihahmo liikkuu vasemmalle.
      */
-    public void liikutaHahmoaVasemmalle() {
+    public void liikutaHahmoaVasemmalleJaPiirra(Graphics g) {
         this.liikutaVasemmalle(virpi);
+        virpi.piirraLiikkuva(g);
     }
 
     /**

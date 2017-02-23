@@ -28,14 +28,15 @@ public class TextUI {
             String komento = lukija.nextLine();
             if (komento.equals("lopeta")) {
                 break;
-            } else if (komento.equals("y") || komento.equals("ylös")) {
-                peli.getKartta().liikutaHahmoaYlos();
-            } else if (komento.equals("a") || komento.equals("alas")) {
-                peli.getKartta().liikutaHahmoaAlas();
-            } else if (komento.equals("o") || komento.equals("oikea")) {
-                peli.getKartta().liikutaHahmoaOikealle();
-            } else if (komento.equals("v") || komento.equals("vasen")) {
-                peli.getKartta().liikutaHahmoaVasemmalle();
+//            } else if (komento.equals("y") || komento.equals("ylös")) {
+//                peli.getKartta().liikutaHahmoaYlosJaPiirra();
+//            } else if (komento.equals("a") || komento.equals("alas")) {
+//                peli.getKartta().liikutaHahmoaAlas();
+//            } else if (komento.equals("o") || komento.equals("oikea")) {
+//                peli.getKartta().liikutaHahmoaOikealle();
+//            } else if (komento.equals("v") || komento.equals("vasen")) {
+//                peli.getKartta().liikutaHahmoaVasemmalle();
+//            }
             }
             System.out.println("");
 

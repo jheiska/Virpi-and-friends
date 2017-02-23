@@ -80,8 +80,9 @@ public class Ruoka implements Liikkuva {
 
     @Override
     public void piirraLiikkuva(Graphics g) {
-        g.setColor(Color.red);
-        g.fillOval(x * 40, y * 40, 40, 40);
+        g.setColor(Color.blue);
+        g.fillOval(x, y * 40, 40, 40);
+                
     }
 
 }

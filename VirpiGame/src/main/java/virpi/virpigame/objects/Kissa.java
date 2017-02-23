@@ -79,7 +79,7 @@ public class Kissa implements Liikkuva {
     @Override
     public void piirraLiikkuva(Graphics g) {
         g.setColor(Color.black);
-        g.fillOval(x * 40, y * 40, 40, 40);
+        g.fillOval(x, y * 40, 40, 40);
     }
 
 }
