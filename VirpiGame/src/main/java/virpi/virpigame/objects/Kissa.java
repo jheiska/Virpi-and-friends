@@ -64,10 +64,7 @@ public class Kissa implements Liikkuva {
 
     @Override
     public void muutaPisteita(int muutos) {
-        pisteet += muutos;
-        if (pisteet < 0) {
-            pisteet = 0;
-        }
+        pisteet += muutos;        
     }
 
     @Override

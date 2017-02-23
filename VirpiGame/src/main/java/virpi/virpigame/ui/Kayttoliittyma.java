@@ -40,6 +40,9 @@ public class Kayttoliittyma implements Runnable{
             public void actionPerformed(ActionEvent e) {
                peli.getKartta().paivitaKartta();
                frame.repaint();
+               if (peli.getTila() == Pelitila.LOPPURUUTU){
+                   timer.stop();
+               }
             }
         });
         timer.start();

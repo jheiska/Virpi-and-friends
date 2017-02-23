@@ -51,8 +51,23 @@ public class Peli extends JPanel {
     public void paintComponent(Graphics g) {
         g.setColor(Color.green);
         g.fillRect(0, 0, 1200, 480);
-        if (tila.equals(Pelitila.PELI)) {
-            if (laskuri == 90){
+        if (tila.equals(Pelitila.PELI)) {            
+            kartta.piirraOliot(g);
+            ruudut.piirraPisteet(g);
+        } else if (tila.equals(Pelitila.ALKURUUTU)) {
+            ruudut.piirraAlkuruutu(g);
+        } else if (tila.equals(Pelitila.LOPPURUUTU)) {
+            ruudut.piirraLoppuruutu(g);
+        }        
+        paivitaTila();
+                
+        //     repaint();
+        //     sleepRefresh();
+    }
+
+    private void paivitaTila(){
+        laskuri++;
+        if (laskuri == 90){
                 kartta.lisaaLiikkuva(new Koira(-300, 1100, 7));
             } else if (laskuri == 180) {
                 kartta.lisaaLiikkuva(new Koira(-300, 1100, 9));
@@ -66,19 +81,12 @@ public class Peli extends JPanel {
             if (laskuri == 360){
                 kartta.lisaaLiikkuva(new Ruoka("safka" + laskuri, 400, 1100, 8));
                 laskuri = 0;
-            }  
-            kartta.piirraOliot(g);
-            ruudut.piirraPisteet(g);
-        } else if (tila.equals(Pelitila.ALKURUUTU)) {
-            ruudut.piirraAlkuruutu(g);
-        } else if (tila.equals(Pelitila.LOPPURUUTU)) {
-            ruudut.piirraLoppuruutu(g);
-        }
-        laskuri++;
-        //     repaint();
-        //     sleepRefresh();
+            }
+            if (kartta.getVirpi().getPisteet() < 0){
+                tila = Pelitila.LOPPURUUTU;
+            }
     }
-
+    
 //    /**
 //     * Odotellaan ja piirretään uudestaan.
 //     */
