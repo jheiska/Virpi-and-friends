@@ -1,29 +1,41 @@
-
 package virpi.virpigame.ui;
 
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import virpi.virpigame.Peli;
-import virpi.virpigame.Pelitila;
+import virpi.virpigame.logiikka.Peli;
+import virpi.virpigame.logiikka.Pelitila;
 
+public class NappaintenKuuntelija implements KeyListener {
 
-public class NappaintenKuuntelija implements KeyListener  {
-    
     private Peli peli;
     private Graphics g;
-    
-    public NappaintenKuuntelija(Peli peli){
+
+    public NappaintenKuuntelija(Peli peli) {
         this.peli = peli;
-        
+
     }
-    
-//    @Override
+
+//  @Override
     public void keyPressed(KeyEvent ke) {
-        if (peli.getTila().equals(peli.getTila().ALKURUUTU) && ke.getKeyCode() == KeyEvent.VK_ENTER) {
-            peli.setTila(Pelitila.PELI);
+        if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (peli.getTila().equals(Pelitila.ALKURUUTU)) {
+                peli.setTila(Pelitila.PELI);
+            }
+            if (peli.getTila().equals(Pelitila.OHJEET)) {
+                peli.setTila(Pelitila.ALKURUUTU);
+            }
+            
+            if (peli.getTila().equals(Pelitila.LOPPURUUTU)) {
+                peli.aloita();
+            }
         }
-        if (peli.getTila().equals(peli.getTila().PELI)) {
+
+        if (ke.getKeyCode() == KeyEvent.VK_SPACE && peli.getTila().equals(Pelitila.ALKURUUTU)) {
+            peli.setTila(Pelitila.OHJEET);
+        }
+
+        if (peli.getTila().equals(Pelitila.PELI)) {
             if (ke.getKeyCode() == KeyEvent.VK_LEFT || ke.getKeyCode() == KeyEvent.VK_A) {
                 peli.liikutaVasemmalle();
             } else if (ke.getKeyCode() == KeyEvent.VK_RIGHT || ke.getKeyCode() == KeyEvent.VK_D) {
@@ -35,7 +47,7 @@ public class NappaintenKuuntelija implements KeyListener  {
             }
         }
     }
-    
+
 //    public void liikutaYlos(){
 //        peli.getKartta().liikutaHahmoaYlosJaPiirra(g);
 //    }
@@ -49,7 +61,6 @@ public class NappaintenKuuntelija implements KeyListener  {
 //    public void liikutaOikealle(){
 //        peli.getKartta().liikutaHahmoaOikealleJaPiirra(g);
 //    }
-
     @Override
     public void keyTyped(KeyEvent ke) {
     }

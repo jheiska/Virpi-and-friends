@@ -68,13 +68,13 @@ public class KissaTest {
     }
 
     @Test
-    public void pisteetMuuttuvatOikeinEikäMeneNegatiiviseksi() {
+    public void pisteetMuuttuvatOikein() {
         kissa.muutaPisteita(300);
         assertEquals(300, kissa.getPisteet());
         kissa.muutaPisteita(-100);
         assertEquals(200, kissa.getPisteet());
         kissa.muutaPisteita(-201);
-        assertEquals(0, kissa.getPisteet());
+        assertEquals(-1, kissa.getPisteet());
     }
 
     @Test

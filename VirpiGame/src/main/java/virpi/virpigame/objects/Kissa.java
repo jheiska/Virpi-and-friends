@@ -66,6 +66,11 @@ public class Kissa implements Liikkuva {
     public void muutaPisteita(int muutos) {
         pisteet += muutos;        
     }
+    
+    
+    public void setPisteet(int pisteet) {
+        this.pisteet = pisteet;
+    }
 
     @Override
     public String toString() {

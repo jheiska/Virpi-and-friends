@@ -1,9 +1,7 @@
-package virpi.virpigame;
+package virpi.virpigame.logiikka;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import virpi.virpigame.objects.*;
 import virpi.virpigame.ui.Ruudut;
@@ -11,105 +9,104 @@ import virpi.virpigame.ui.Ruudut;
 public class Peli extends JPanel {
 
     private Kartta kartta;
-    private Kissa pelihahmo;
-    private Pelitila tila = Pelitila.ALKURUUTU;
     private Ruudut ruudut;
     private int laskuri;
+    private Kissa pelihahmo;
+    private Pelitila tila;
 
     /**
-     * Konstruktorissa luodaan uusi Kartta -olio ja pelihahmo ja aloitetaan
-     * peli.
+     * Konstruktorissa luodaan uusi Kartta -olio ja ruudut, asetetaan laskuri
+     * nollaan ja aloitetaan peli.
      */
     public Peli() {
         kartta = new Kartta(10, 1200);
-        pelihahmo = new Kissa("Virpi", 0, kartta.haeAloitusRuutu());
-        kartta.lisaaPelihahmo(pelihahmo);
         ruudut = new Ruudut(this);
-        laskuri = 0;        
-        this.aloita();
+        laskuri = 0;
+        aloita();
     }
 
     /**
-     * Pelin aloituskomto kutsuu omia koirien ja ruokien lisäilymetodeita.
+     * Pelin aloituskomento luo pelihahmon ja lisää pelihahmon karttaan. Sitten
+     * kutsuu omia koirien ja ruokien lisäilymetodeita.
      */
     public void aloita() {
-
+        tila = Pelitila.ALKURUUTU;
+        pelihahmo = new Kissa("Virpi", 0, kartta.haeAloitusRuutu());
+        kartta.lisaaPelihahmo(pelihahmo);
         this.lisaaRuokia();
         this.lisaaKoiria();
-//         Oikeaan alalaitaan tulostuva objekti ruudun koon testailua varten
-//         Ruoka ruoka4 = new Ruoka("Makkara", 500, 30, 4);
-//         kartta.lisaaLiikkuva(ruoka4);
-
     }
 
     /**
-     * Tyhjätään, piirretään ja päivitetään kenttää. Mikäli pelitilana on
-     * ALKURUUTU, piirretään alkuruutu.
+     * Piirretään ruutu uusiksi ja lopuksi päivitetään pelin tila. Mikäli
+     * pelitilana on ALKURUUTU tai LOPPURUUTU piirretään vastaavat screenit.
      *
      * @param g grafiikkaparametri
      */
     public void paintComponent(Graphics g) {
         g.setColor(Color.green);
         g.fillRect(0, 0, 1200, 480);
-        if (tila.equals(Pelitila.PELI)) {            
+        if (tila.equals(Pelitila.PELI)) {
             kartta.piirraOliot(g);
             ruudut.piirraPisteet(g);
+            paivitaTila();
         } else if (tila.equals(Pelitila.ALKURUUTU)) {
             ruudut.piirraAlkuruutu(g);
         } else if (tila.equals(Pelitila.LOPPURUUTU)) {
             ruudut.piirraLoppuruutu(g);
-        }        
-        paivitaTila();
-                
-        //     repaint();
-        //     sleepRefresh();
+        } else if (tila.equals(Pelitila.OHJEET)) {
+            ruudut.piirraKayttoOhje(g);
+        }
+
     }
 
-    private void paivitaTila(){
+    /**
+     * Päivitetään pelin tilaa. Laskuri juoksee ja tietyillä laskurin arvoilla
+     * lisätään erilaisia olioita ruudulle. Nämä vielä kiinteitä, pitää lisätä
+     * randomia. Mikäli pisteet menevät miinukselle, pelitilaksi LOPPURUUTU.
+     */
+    private void paivitaTila() {
         laskuri++;
-        if (laskuri == 90){
-                kartta.lisaaLiikkuva(new Koira(-300, 1100, 7));
-            } else if (laskuri == 180) {
-                kartta.lisaaLiikkuva(new Koira(-300, 1100, 9));
-            } else if (laskuri == 300) {
-                kartta.lisaaLiikkuva(new Koira(-300, 1100, 5));
-            }
-            
-            if (laskuri == 140){
-                kartta.lisaaLiikkuva(new Ruoka("safka" + laskuri, 400, 1100, 3));               
-            }  
-            if (laskuri == 360){
-                kartta.lisaaLiikkuva(new Ruoka("safka" + laskuri, 400, 1100, 8));
-                laskuri = 0;
-            }
-            if (kartta.getVirpi().getPisteet() < 0){
-                tila = Pelitila.LOPPURUUTU;
-            }
+        if (laskuri == 90) {
+            kartta.lisaaLiikkuva(new Koira(-300, 1100, 7));
+        } else if (laskuri == 180) {
+            kartta.lisaaLiikkuva(new Koira(-300, 1100, 9));
+        } else if (laskuri == 300) {
+            kartta.lisaaLiikkuva(new Koira(-300, 1100, 5));
+        }
+
+        if (laskuri == 140) {
+            kartta.lisaaLiikkuva(new Ruoka("safka" + laskuri, 400, 1100, 3));
+        }
+        if (laskuri == 360) {
+            kartta.lisaaLiikkuva(new Ruoka("safka" + laskuri, 400, 1100, 8));
+            laskuri = 0;
+        }
+        kartta.paivitaKartta();
+        if (kartta.getVirpi().getPisteet() < 0) {
+            tila = Pelitila.LOPPURUUTU;
+        }
     }
-    
-//    /**
-//     * Odotellaan ja piirretään uudestaan.
-//     */
-//    void sleepRefresh() {
-//        try {
-//            Thread.sleep(500);
-//        } catch (Exception e) {
-//        }
-//        repaint();
-//    }
+
+    /**
+     * Hahmo liikkuu ja piirretään uusiksi.
+     */
     public void liikutaYlos() {
         kartta.liikutaHahmoaYlosJaPiirra(this.getGraphics());
         repaint();
-
     }
 
+    /**
+     * Hahmo liikkuu ja piirretään uusiksi.
+     */
     public void liikutaAlas() {
-
         kartta.liikutaHahmoaAlasJaPiirra(this.getGraphics());
         repaint();
-
     }
 
+    /**
+     * Hahmo liikkuu ja piirretään uusiksi.
+     */
     public void liikutaVasemmalle() {
         for (int i = 0; i < 40; i++) {
             kartta.liikutaHahmoaVasemmalleJaPiirra(this.getGraphics());
@@ -118,6 +115,9 @@ public class Peli extends JPanel {
 
     }
 
+    /**
+     * Hahmo liikkuu ja piirretään uusiksi.
+     */
     public void liikutaOikealle() {
         for (int i = 0; i < 40; i++) {
             kartta.liikutaHahmoaOikealleJaPiirra(this.getGraphics());

@@ -1,5 +1,6 @@
 package virpi.virpigame.objects;
 
+import virpi.virpigame.logiikka.Kartta;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.After;
@@ -8,7 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import virpi.virpigame.Peli;
+import virpi.virpigame.logiikka.Peli;
 
 public class KarttaTest {
 
@@ -39,6 +40,7 @@ public class KarttaTest {
 
     @Test
     public void konstruktoriLuoOikeanKokoisenOletusKartan() {
+        kartta = new Kartta();
         assertEquals(5, kartta.palautaKartta().length);
         assertEquals(30, kartta.palautaKartta()[0].length);
     }
@@ -52,30 +54,13 @@ public class KarttaTest {
 
     @Test
     public void oikeaAloitusRuutu() {
+        kartta = new Kartta();
         assertEquals(2, kartta.haeAloitusRuutu());
         kartta = new Kartta(10, 50);
         assertEquals(5, kartta.haeAloitusRuutu());
     }
 
-    @Test
-    public void tyhjanKartanTulostusToimii() {
-        Kartta kartta = new Kartta(2, 4);
-        ByteArrayOutputStream tuloste = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(tuloste));
-        kartta.tulostaKartta();
-        assertEquals("____" + "\n" + "____" + "\n", tuloste.toString());
-    }
-
-//    @Test
-//    public void kartanTulostusToimiiHahmollaJaSapuskalla() {
-//        Kartta kartta = new Kartta(3, 4);          
-//        Ruoka ruoka = new Ruoka("Latz", 100, 2, 1);
-//        kartta.lisaaLiikkuva(ruoka);
-//        ByteArrayOutputStream tuloste = new ByteArrayOutputStream();
-//        System.setOut(new PrintStream(tuloste));
-//        kartta.tulostaKartta();
-//        assertEquals("____" + "\n" + "X_L_" + "\n" + "____" + "\n", tuloste.toString());
-//    }
+  
 
 //    @Test
 //    public void pelihahmonLiikutteluToimii() {
@@ -88,7 +73,7 @@ public class KarttaTest {
 //        assertEquals(kartta.palautaPelihahmo(), kartta.palautaKartta()[2][1]);
 //        kartta.liikutaHahmoaAlas();
 //        assertEquals(kartta.palautaPelihahmo(), kartta.palautaKartta()[3][1]);
-//        kartta.liikutaHahmoaYlosJaPiirra();
+//        kartta.liikutaHahmoaYlos();
 //        assertEquals(kartta.palautaPelihahmo(), kartta.palautaKartta()[2][1]);
 //        kartta.liikutaHahmoaVasemmalle();
 //        assertEquals(kartta.palautaPelihahmo(), kartta.palautaKartta()[2][0]);
@@ -145,32 +130,20 @@ public class KarttaTest {
         assertEquals(true, kartta.mahtuukoRuudukkoon(ruoka8));
     }
 
-    @Test
-    public void pelinLuominenOnAsettanutKartalleVirpinJaRuuatJaKoirat(){
-        assertNotEquals(null, kartta.palautaKartta()[2][0]);
-        assertNotEquals(null, kartta.palautaKartta()[3][800]);
-        assertNotEquals(null, kartta.palautaKartta()[2][900]);
-        assertNotEquals(null, kartta.palautaKartta()[0][1100]);
-        assertNotEquals(null, kartta.palautaKartta()[4][1200]);
-        assertNotEquals(null, kartta.palautaKartta()[0][1000]);
-        assertNotEquals(null, kartta.palautaKartta()[2][750]);
-        assertNotEquals(null, kartta.palautaKartta()[1][250]);
-        assertEquals(null, kartta.palautaKartta()[2][2]);
-    }
-    
+      
     @Test
     public void kartanPaivitysToimii() {
+        Ruoka ruoka5 = new Ruoka("R1", 100, 0, 0);
+        kartta.lisaaLiikkuva(ruoka5);
+        Ruoka ruoka6 = new Ruoka("R2", 100, 100, 3);
+        kartta.lisaaLiikkuva(ruoka6);
+
+        assertNotEquals(null, kartta.palautaKartta()[0][0]);
+        assertNotEquals(null, kartta.palautaKartta()[3][100]);
         kartta.paivitaKartta();
-        assertNotEquals(null, kartta.palautaKartta()[2][0]);
-        assertEquals(null, kartta.palautaKartta()[3][3]);
-        assertNotEquals(null, kartta.palautaKartta()[3][2]);
-        assertEquals(null, kartta.palautaKartta()[2][15]);
-        assertNotEquals(null, kartta.palautaKartta()[2][14]);
-        assertNotEquals(null, kartta.palautaKartta()[0][21]);
-        assertNotEquals(null, kartta.palautaKartta()[4][19]);
-        assertNotEquals(null, kartta.palautaKartta()[0][9]);
-        assertNotEquals(null, kartta.palautaKartta()[2][14]);
-        assertNotEquals(null, kartta.palautaKartta()[1][24]);
+        assertEquals(null, kartta.palautaKartta()[0][0]);
+        assertNotEquals(null, kartta.palautaKartta()[3][99]);
+        assertEquals(null, kartta.palautaKartta()[3][100]);
         
     }
     

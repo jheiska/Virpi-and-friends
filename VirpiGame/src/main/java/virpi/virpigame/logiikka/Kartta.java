@@ -1,6 +1,8 @@
-package virpi.virpigame.objects;
+package virpi.virpigame.logiikka;
 
 import java.awt.Graphics;
+import virpi.virpigame.objects.Kissa;
+import virpi.virpigame.objects.Liikkuva;
 
 public class Kartta {
 
@@ -57,24 +59,7 @@ public class Kartta {
         return pelialue.length / 2;
     }
 
-    /**
-     * Tulostetaan pelialue, tyhjiin ruutuihin _ Liikkuvien ruutuihin toStringin ensimmäinen merkki.
-     * Lähinnä testailua varten tekstiversiona ennen graafisen puolen toteutusta.
-     */
-    public void tulostaKartta() {
-        for (Liikkuva[] liikkuvat : pelialue) {
-            for (Liikkuva liikkuva : liikkuvat) {
-                if (liikkuva == null) {
-                    System.out.print("_");
-                } else {
-                    System.out.print(liikkuva.toString().charAt(0));
-                }
-            }
-            System.out.print("\n");
-        }
-    }
-
-    /**
+     /**
      * Piirretään kaikki kartalta löytyvät liikkuvat kutsumalla niiden piirtometodia.
      * @param g grafiikkaparametri.
      */
@@ -123,9 +108,10 @@ public class Kartta {
     }
 
     /**
-     * Pelihahmolle on omat liikuttelukomennot helpottamaan toteutusta ja
-     * välttämään sekaannuksia.
-     */
+     *  Pelihahmo liikkuu alas ja se piirretään uusiksi.
+     *
+     * @param g grafiikkaparametri
+     */     
     public void liikutaHahmoaYlosJaPiirra(Graphics g) {
         this.liikutaYlos(virpi);
         virpi.piirraLiikkuva(g);
@@ -145,7 +131,9 @@ public class Kartta {
     }
 
     /**
-     * Pelihahmo liikkuu alas.
+     * Pelihahmo liikkuu alas ja se piirretään uusiksi.
+     * 
+     * @param g grafiikkaparametri
      */
     public void liikutaHahmoaAlasJaPiirra(Graphics g) {
         this.liikutaAlas(virpi);
@@ -166,7 +154,9 @@ public class Kartta {
     }
 
     /**
-     * Pelihahmo liikkuu oikealle.
+     * Pelihahmo liikkuu oikealle ja se piirretään uusiksi.
+     * 
+     * @param g grafiikkaparametri
      */
     public void liikutaHahmoaOikealleJaPiirra(Graphics g) {
         this.liikutaOikealle(virpi);
@@ -187,7 +177,9 @@ public class Kartta {
     }
 
     /**
-     * Pelihahmo liikkuu vasemmalle.
+     * Pelihahmo liikkuu vasemmalle ja se piirretään uusiksi.
+     * 
+     * @param g grafiikkaparametri
      */
     public void liikutaHahmoaVasemmalleJaPiirra(Graphics g) {
         this.liikutaVasemmalle(virpi);

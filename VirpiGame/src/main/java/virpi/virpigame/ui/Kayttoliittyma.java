@@ -5,6 +5,8 @@
  */
 package virpi.virpigame.ui;
 
+import virpi.virpigame.logiikka.Pelitila;
+import virpi.virpigame.logiikka.Peli;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,15 +39,12 @@ public class Kayttoliittyma implements Runnable{
         frame.pack();      
 
         Timer timer = new Timer(13, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-               peli.getKartta().paivitaKartta();
-               frame.repaint();
-               if (peli.getTila() == Pelitila.LOPPURUUTU){
-                   timer.stop();
-               }
+            public void actionPerformed(ActionEvent e) {              
+               frame.repaint();               
             }
         });
         timer.start();
+//       
     }
 
 //    private void luoKomponentit(Container container) {        
