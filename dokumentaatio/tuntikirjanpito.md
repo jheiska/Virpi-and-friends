@@ -11,3 +11,6 @@ Päivä | Tunnit | Kuvaus
 10.02.2017 | 4h | Graafisen puolen ihmettelyä
 16.02.2017 | 6h | Pallot saatiin rullaamaan ja sitten vielä hahmon liikuttelut
 17.02.2017 | 6h | JavaDoccia, liikuttelun säätöä, aloitusruutua yms.
+22.02.2017 | 4h | Epämääräistä suunnittelua ja tutoriaalien ihmettelyä
+23.02.2017 | 4h | Näytön refresh uusiksi ja muuta
+24.02.2017 | 3h | Dokumentaatiota yms
