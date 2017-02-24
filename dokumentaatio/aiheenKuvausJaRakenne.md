@@ -8,7 +8,7 @@
 - pelaaminen
 
 
-![Luokkakaavio](luokkakaavio3.png)
+![Luokkakaavio](luokkakaavio4.png)
 
 
 **Rakennekuvaus:** Liikkuva -oliot, eli Kissa, Koira ja Ruoka ovat pelissä liikkuvia objekteja, Kissan toimiessa pelihahmona. Kartta -olio sisältää "ruudukon" jossa objektit sijaitsevat. Se sisältää myös pelin olennaisen toimintalogiikan, eli hahmon liikutuskomennot, sekä pelitilanteen päivityksen.
