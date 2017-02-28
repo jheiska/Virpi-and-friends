@@ -1,6 +1,5 @@
 package virpi.virpigame.ui;
 
-import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import virpi.virpigame.logiikka.Peli;
@@ -9,7 +8,6 @@ import virpi.virpigame.logiikka.Pelitila;
 public class NappaintenKuuntelija implements KeyListener {
 
     private Peli peli;
-    private Graphics g;
 
     public NappaintenKuuntelija(Peli peli) {
         this.peli = peli;
@@ -24,8 +22,7 @@ public class NappaintenKuuntelija implements KeyListener {
             }
             if (peli.getTila().equals(Pelitila.OHJEET)) {
                 peli.setTila(Pelitila.ALKURUUTU);
-            }
-            
+            }            
             if (peli.getTila().equals(Pelitila.LOPPURUUTU)) {
                 peli.aloita();
             }
@@ -48,19 +45,6 @@ public class NappaintenKuuntelija implements KeyListener {
         }
     }
 
-//    public void liikutaYlos(){
-//        peli.getKartta().liikutaHahmoaYlosJaPiirra(g);
-//    }
-//    
-//    public void liikutaAlas(){
-//        peli.getKartta().liikutaHahmoaAlasJaPiirra(g);
-//    }
-//    public void liikutaVasemmalle(){
-//        peli.getKartta().liikutaHahmoaVasemmalleJaPiirra(g);
-//    }
-//    public void liikutaOikealle(){
-//        peli.getKartta().liikutaHahmoaOikealleJaPiirra(g);
-//    }
     @Override
     public void keyTyped(KeyEvent ke) {
     }

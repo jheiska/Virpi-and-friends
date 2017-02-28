@@ -25,7 +25,7 @@ public class KissaTest {
 
     @Before
     public void setUp() {
-        kissa = new Kissa("Virpi", 1, 2);
+        kissa = new Kissa(1, 2);
     }
 
     @After
@@ -62,21 +62,7 @@ public class KissaTest {
         assertEquals(0, kissa.getX());
     }
 
-    @Test
-    public void palauttaaOikeatPisteet() {
-        assertEquals(0, kissa.getPisteet());
-    }
-
-    @Test
-    public void pisteetMuuttuvatOikein() {
-        kissa.muutaPisteita(300);
-        assertEquals(300, kissa.getPisteet());
-        kissa.muutaPisteita(-100);
-        assertEquals(200, kissa.getPisteet());
-        kissa.muutaPisteita(-201);
-        assertEquals(-1, kissa.getPisteet());
-    }
-
+     
     @Test
     public void palauttaaOikeanXKoordinaatin() {
         assertEquals(1, kissa.getX());
@@ -87,8 +73,4 @@ public class KissaTest {
         assertEquals(2, kissa.getY());
     }
 
-    @Test
-    public void toStringPalauttaaOikeanNimen() {
-        assertEquals("X", kissa.toString());
-    }
 }

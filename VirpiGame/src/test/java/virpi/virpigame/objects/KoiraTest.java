@@ -25,7 +25,7 @@ public class KoiraTest {
 
     @Before
     public void setUp() {
-        koira = new Koira(-200, 1, 2);
+        koira = new Koira("hauva", 1, 2);
     }
 
     @After
@@ -59,21 +59,10 @@ public class KoiraTest {
         koira.liikuVasemmalle();
         assertEquals(0, koira.getX());
         koira.liikuVasemmalle();
-        assertEquals(0, koira.getX());
+        assertEquals(-1, koira.getX());
     }
 
-    @Test
-    public void palauttaaOikeatPisteet() {
-        assertEquals(-200, koira.getPisteet());
-    }
-
-    @Test
-    public void pisteetMuuttuvatOikein() {
-        koira.muutaPisteita(300);
-        assertEquals(100, koira.getPisteet());
-        koira.muutaPisteita(-200);
-        assertEquals(-100, koira.getPisteet());
-    }
+   
 
     @Test
     public void palauttaaOikeanXKoordinaatin() {
@@ -85,9 +74,5 @@ public class KoiraTest {
         assertEquals(2, koira.getY());
     }
 
-    @Test
-    public void toStringPalauttaaOikeanNimen() {
-        assertEquals("K", koira.toString());
-    }
 
 }

@@ -1,12 +1,13 @@
 virpi\virpigame\logiikka\Kartta.class
-virpi\virpigame\objects\Kissa.class
-virpi\virpigame\objects\Liikkuva.class
-virpi\virpigame\logiikka\Pelitila.class
 virpi\virpigame\Main.class
 virpi\virpigame\ui\Kayttoliittyma$1.class
 virpi\virpigame\objects\Koira.class
 virpi\virpigame\ui\Kayttoliittyma.class
 virpi\virpigame\ui\Ruudut.class
+virpi\virpigame\objects\Kissa.class
+virpi\virpigame\objects\Liikkuva.class
+virpi\virpigame\logiikka\Pelitila.class
+virpi\virpigame\ui\Piirtaja.class
 virpi\virpigame\objects\Ruoka.class
 virpi\virpigame\logiikka\Peli.class
 virpi\virpigame\ui\NappaintenKuuntelija.class

@@ -1,120 +1,89 @@
 package virpi.virpigame.logiikka;
 
-import java.awt.Graphics;
-import virpi.virpigame.objects.Kissa;
-import virpi.virpigame.objects.Liikkuva;
+import java.util.ArrayList;
+import java.util.Random;
+import virpi.virpigame.objects.*;
 
 public class Kartta {
 
-    private Liikkuva[][] pelialue;
     private Kissa virpi;
+    private ArrayList<Liikkuva> liikkuvat;
+    private int maxX;
+    private int maxY;
 
     /**
-     * Konstruktori luo kartan oletusmitoilla 5 x 30.
-     */
-    public Kartta() {
-        pelialue = new Liikkuva[5][30];
-    }
-
-    /**
-     * Luodaan kartta annetuilla mitoilla.
+     * Luodaan kartta -olio ja sinne lista liikkuvista.
      *
-     * @param korkeus kartan korkeus eli y-koordinaatit
-     * @param leveys kartan leveys eli x-koordinaatit
+     * @param maxX pelialueen maksimileveys
+     * @param maxY pelialueen maksimikorkeus
      */
-    public Kartta(int korkeus, int leveys) {
-        pelialue = new Liikkuva[korkeus][leveys];
+    public Kartta(int maxX, int maxY) {
+        liikkuvat = new ArrayList<Liikkuva>();
+        this.maxX = maxX + 20;
+        this.maxY = maxY;
     }
 
     /**
-     * Asetetaan pelihahmo ja lisätään se kartalle.
+     * Asetetaan parametrina annettu kissa pelihahmoksi ja lisätään se kartalle.
+     *
      * @param virpi pelihahmoksi Kissa-olio.
      */
     public void lisaaPelihahmo(Kissa virpi) {
         this.virpi = virpi;
-        this.lisaaLiikkuva(virpi);
     }
 
     /**
-     * Haetaan pelihahmo.
-     * @return palauttaa pelihahmona toimivan Kissa-olion.
-     */
-    public Kissa palautaPelihahmo() {
-        return this.virpi;
-    }
-
-    /**
-     * Palautetaan pelikenttä.
-     * @return Liikkuvia sisältävä "array-ruudukko".
-     */
-    public Liikkuva[][] palautaKartta() {
-        return this.pelialue;
-    }
-
-    /**
-     * Pelihahmon aloitusruuduksi ruudukon keskimmäinen "kaista".
-     * @return aloitusruudun y-koordinaatti.
-     */
-    public int haeAloitusRuutu() {
-        return pelialue.length / 2;
-    }
-
-     /**
-     * Piirretään kaikki kartalta löytyvät liikkuvat kutsumalla niiden piirtometodia.
-     * @param g grafiikkaparametri.
-     */
-    public void piirraOliot(Graphics g) {
-        for (Liikkuva[] liikkuvat : pelialue) {
-            for (Liikkuva liikkuva : liikkuvat) {
-                if (liikkuva != null) {
-                    liikkuva.piirraLiikkuva(g);
-                }
-
-            }
-
-        }
-    }
-
-    /**
-     * Lisätään ruudukkoon jokin olio, tarkistetaan että sen koordinaatit
-     * sopivat kartalle. Kommenteissa tarkennusta.
+     * Lisätään listaan jokin olio, mikäli se ei olisi menossa pelihahmon päälle
+     * eikä koordinaatiston ulkopuolelle.
      *
      * @param asia on ruudukkoon lisättävä olio
      */
     public void lisaaLiikkuva(Liikkuva asia) {
-        if (this.mahtuukoRuudukkoon(asia)) {
-            // jos ruutuun ollaan laittamassa virpiä ja ruudussa on jo jokin asia, virpin pisteet muuttuvat
-            if (asia.equals(virpi) && pelialue[asia.getY()][asia.getX()] != null) {
-                virpi.muutaPisteita(pelialue[asia.getY()][asia.getX()].getPisteet());
+        if (asia.getX() != virpi.getX() && asia.getY() != virpi.getY()) {
+            if (mahtuukoRuudukkoon(asia)) {
+                liikkuvat.add(asia);
             }
-            pelialue[asia.getY()][asia.getX()] = asia;
         }
     }
+    
+    /**
+     * Lisätään koira satunnaiselle kaistalle.
+     */
+    public void lisaaKoira(){
+        Random random = new Random();
+        int y = random.nextInt(maxY);
+        lisaaLiikkuva(new Koira("Hauva", maxX, y));
+    }
+    
+    /**
+     * Lisätään ruoka satunnaiselle kaistalle.
+     */
+    public void lisaaRuoka(){
+        Random random = new Random();
+        int y = random.nextInt(maxY);
+        lisaaLiikkuva(new Ruoka("Herkku", maxX, y));
+    }
+    
 
     /**
      * Kaikissa liikuttelukomennoissa tarkistetaan ensin, ettei olla menossa
-     * ulos pelialueelta. Jos ollaan, ei liikuta ollenkaan. Jos liikutaan,
-     * poistetaan liikkuva kartasta, päivitetään sen koordinaatit ja lisätään se
-     * uuteen sijaintiin. Tässä mennään ylös.
+     * ulos pelialueelta. Jos ollaan, ei liikuta ollenkaan. Ensimmäisenä
+     * liikutaan ylös.
      *
      * @param asia Liikkuva-olio parametrina.
      */
     public void liikutaYlos(Liikkuva asia) {
         if (asia.getY() > 0) {
-            pelialue[asia.getY()][asia.getX()] = null;
             asia.liikuYlos();
-            this.lisaaLiikkuva(asia);
         }
     }
 
     /**
-     *  Pelihahmo liikkuu alas ja se piirretään uusiksi.
+     * Pelihahmolle omat liikkumiskomennot. Pelihahmo liikkuu alas.
      *
-     * @param g grafiikkaparametri
-     */     
-    public void liikutaHahmoaYlosJaPiirra(Graphics g) {
-        this.liikutaYlos(virpi);
-        virpi.piirraLiikkuva(g);
+     */
+    public void liikutaHahmoaYlos() {
+        liikutaYlos(virpi);
     }
 
     /**
@@ -123,21 +92,17 @@ public class Kartta {
      * @param asia on Liikkuva jota liikutetaan.
      */
     public void liikutaAlas(Liikkuva asia) {
-        if (asia.getY() + 1 < pelialue.length) {
-            pelialue[asia.getY()][asia.getX()] = null;
+        if (asia.getY() < maxY) {
             asia.liikuAlas();
-            this.lisaaLiikkuva(asia);
         }
     }
 
     /**
-     * Pelihahmo liikkuu alas ja se piirretään uusiksi.
-     * 
-     * @param g grafiikkaparametri
+     * Pelihahmo liikkuu alas.
+     *
      */
-    public void liikutaHahmoaAlasJaPiirra(Graphics g) {
-        this.liikutaAlas(virpi);
-        virpi.piirraLiikkuva(g);
+    public void liikutaHahmoaAlas() {
+        liikutaAlas(virpi);
     }
 
     /**
@@ -146,44 +111,37 @@ public class Kartta {
      * @param asia on Liikkuva jota liikutetaan.
      */
     public void liikutaOikealle(Liikkuva asia) {
-        if (asia.getX() + 1 < pelialue[0].length) {
-            pelialue[asia.getY()][asia.getX()] = null;
+        if (asia.getX() + 1 < maxX) {
             asia.liikuOikealle();
-            this.lisaaLiikkuva(asia);
         }
     }
 
     /**
-     * Pelihahmo liikkuu oikealle ja se piirretään uusiksi.
-     * 
-     * @param g grafiikkaparametri
+     * Pelihahmo liikkuu oikealle.
+     *
      */
-    public void liikutaHahmoaOikealleJaPiirra(Graphics g) {
-        this.liikutaOikealle(virpi);
-        virpi.piirraLiikkuva(g);
+    public void liikutaHahmoaOikealle() {
+        liikutaOikealle(virpi);
     }
 
     /**
-     * Liikkuva liikkuu vasemmalle.
+     * Liikkuva liikkuu vasemmalle. Muut kuin pelihahmo voivat rullata ulos
+     * ruudulta vasemmalle liikuttaessa.
      *
      * @param asia on Liikkuva jota liikutetaan.
      */
     public void liikutaVasemmalle(Liikkuva asia) {
-        pelialue[asia.getY()][asia.getX()] = null;
-        if (asia.getX() > 0) {
-            asia.liikuVasemmalle();
-            this.lisaaLiikkuva(asia);
-        }
+        asia.liikuVasemmalle();
     }
 
     /**
-     * Pelihahmo liikkuu vasemmalle ja se piirretään uusiksi.
-     * 
-     * @param g grafiikkaparametri
+     * Pelihahmo liikkuu vasemmalle. Tarkistetaan erikseen ettei mennä ulos.
+     *
      */
-    public void liikutaHahmoaVasemmalleJaPiirra(Graphics g) {
-        this.liikutaVasemmalle(virpi);
-        virpi.piirraLiikkuva(g);
+    public void liikutaHahmoaVasemmalle() {
+        if (virpi.getX() >= 0){
+            this.liikutaVasemmalle(virpi);
+        }
     }
 
     /**
@@ -195,7 +153,7 @@ public class Kartta {
     public boolean mahtuukoRuudukkoon(Liikkuva asia) {
         int x = asia.getX();
         int y = asia.getY();
-        if (x < pelialue[0].length && x >= 0 && y < pelialue.length && y >= 0) {
+        if (x <= maxX && x >= 0 && y <= maxY && y >= 0) {
             return true;
         } else {
             return false;
@@ -203,22 +161,17 @@ public class Kartta {
     }
 
     /**
-     * Kaikkia kartalla olevia olioita siirretään pykälä vasemmalle.
-     * Kommentteina tarkennuksia.
+     * Siirretään kaikkia liikkuvia pykälä vasemmalle. Poistetaan jos menee
+     * vasemmalta ulos.
      */
-    public void paivitaKartta() {
-        // poistetaan ensin pelihahmo kartalta
-        pelialue[virpi.getY()][virpi.getX()] = null;
-        // liikutetaan kaikkia kartalla olevia asioita pykälä vasemmalle
-        for (Liikkuva[] liikkuvat : pelialue) {
-            for (Liikkuva liikkuva : liikkuvat) {
-                if (liikkuva != null) {
-                    this.liikutaVasemmalle(liikkuva);
-                }
-            }
+    public void paivitaKartta() {        
+        for (Liikkuva liikkuva : liikkuvat) {
+            liikutaVasemmalle(liikkuva);
         }
-        // lopuksi hahmo takaisin kartalle
-        this.lisaaLiikkuva(virpi);
+    }
+
+    public ArrayList<Liikkuva> getLiikkuvat() {
+        return liikkuvat;
     }
 
     public Liikkuva getVirpi() {

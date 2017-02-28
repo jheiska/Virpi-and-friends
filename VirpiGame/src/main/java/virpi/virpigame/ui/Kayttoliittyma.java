@@ -5,7 +5,6 @@
  */
 package virpi.virpigame.ui;
 
-import virpi.virpigame.logiikka.Pelitila;
 import virpi.virpigame.logiikka.Peli;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -13,9 +12,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
-import virpi.virpigame.*;
+import virpi.virpigame.logiikka.Pelitila;
 
-public class Kayttoliittyma implements Runnable{
+public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
 
@@ -30,30 +29,31 @@ public class Kayttoliittyma implements Runnable{
 
         frame = new JFrame("Virpi and friends");
         Peli peli = new Peli();
+        Piirtaja piirtaja = new Piirtaja(peli);
         frame.setPreferredSize(new Dimension(1200, 480));
-        frame.add(peli);
+        frame.add(piirtaja);
         frame.addKeyListener(new NappaintenKuuntelija(peli));
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        //luoKomponentit(frame.getContentPane());
-        frame.pack();      
+        frame.pack();
 
+        
         Timer timer = new Timer(13, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {              
-               frame.repaint();               
+            
+            public void actionPerformed(ActionEvent e) {
+                if (peli.getTila() == Pelitila.PELI){
+                    peli.paivitaTila();    
+                }
+                
+                frame.repaint();
             }
         });
+        
+        peli.aloita();
         timer.start();
-//       
+
     }
 
-//    private void luoKomponentit(Container container) {        
-//        container.add(new JLabel("Tervetuloa peliin Virpi and friends. Paina enter aloittaaksesi!"), BorderLayout.NORTH);
-//        Peli peli = new Peli();
-//        container.add(peli);
-//        frame.addKeyListener(peli);
-//    }
-    
     public JFrame getFrame() {
         return frame;
     }

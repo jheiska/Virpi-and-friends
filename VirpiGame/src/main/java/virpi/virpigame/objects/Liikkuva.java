@@ -1,68 +1,66 @@
 package virpi.virpigame.objects;
 
-import java.awt.Graphics;
+import java.awt.Color;
 
-/**
- * Kaikilla liikkuvilla olioilla on metodit joilla liikutellaan niitä eri
- * suuntiin, sekä pisteiden hallintaan ja piirtelyyn.
- */
-public interface Liikkuva {
+public abstract class Liikkuva {
+
+    private int x;
+    int y;
+
+    public Liikkuva(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     /**
      * Liikutetaan Liikkuvaa ylös, eli pienennetään sen y-koordinaattia koska
      * pystysuuntaan koordinaatit ovat "väärinpäin". Varotaan ettei mene
      * negatiiviseksi.
      */
-    void liikuYlos();
+    public void liikuYlos() {
+        if (this.y > 0) {
+            this.y--;
+        }
+    }
 
     /**
      * Liikutetaan Liikkuvaa alas eli kasvatetaan sen y-koordinaattia.
      */
-    void liikuAlas();
+    public void liikuAlas() {
+        this.y++;
+    }
 
     /**
      * Liikutetaan Liikkuvaa oikealle, eli kasvatetaan sen x-koordinaattia.
      */
-    void liikuOikealle();
+    public void liikuOikealle() {
+        this.x++;
+    }
 
     /**
      * Liikutetaan Liikkuvaa vasemmalle, eli pienennetään sen x-koordinaattia.
-     * Varotaan ettei mene negatiiviseksi.
      */
-    void liikuVasemmalle();
+    public void liikuVasemmalle() {
+        this.x--;
+
+    }
 
     /**
      * Sijainti.
      *
      * @return x-koordinaatti
      */
-    int getX();
+    public int getX() {
+        return this.x;
+    }
 
     /**
      * Sijainti.
      *
      * @return y-koordinaatti
      */
-    int getY();
+    public int getY() {
+        return this.y;
+    }
 
-    /**
-     * Kaikilla Liikkuvilla on pistemäärä.
-     *
-     * @return pisteet
-     */
-    int getPisteet();
-
-    /**
-     * Pistemäärää on pystyttävä myös muuttamaan.
-     *
-     * @param muutos paljonko pisteet muuttuvat.
-     */
-    void muutaPisteita(int muutos);
-
-    /**
-     * Piirretään Liikkuva näytölle.
-     *
-     * @param g grafiikkaparametri
-     */
-    void piirraLiikkuva(Graphics g);
 }

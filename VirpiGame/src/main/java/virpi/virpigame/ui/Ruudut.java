@@ -11,9 +11,7 @@ public class Ruudut {
     
     public Ruudut(Peli peli) {
         this.peli = peli;
-    }
-
-    
+    }    
     
     /**
      * Piirretään aloitusruutu - lähinnä tekstiä ainakin tässä vaiheessa.
@@ -42,8 +40,7 @@ public class Ruudut {
         Font pistefontti = new Font("Comic Sans MS", Font.BOLD, 15);
         g.setFont(pistefontti);
         g.setColor(Color.BLACK);
-        g.drawString("Pisteesi: " + peli.getPisteet(), 250, 440);        
-        
+        g.drawString("Pisteesi: " + peli.getPisteet() + "                      Elämiä jäljellä: " + peli.getElamat(), 350, 420);
     }
     
     public void piirraKayttoOhje(Graphics g){
@@ -51,8 +48,8 @@ public class Ruudut {
         g.setFont(ohjefontti);
         g.setColor(Color.BLACK);
         g.drawString("Ohjaa pelihahmoa eli mustaa palloa nuolinäppäimillä tai WASD.", 200, 150);
-        g.drawString("Neliöitä pitää varoa, niistä tulee miinuspisteitä ja jos pisteet menevät miinukselle, peli loppuu.", 200, 180);
-        g.drawString("Palloja keräämällä saat lisäpisteitä.", 200, 210);
+        g.drawString("Neliöitä pitää varoa, niistä menettää elämiä ja jos elämät loppuvat, pelikin loppuu.", 200, 180);
+        g.drawString("Palloja keräämällä saat pisteitä.", 200, 210);
         g.drawString("Paina <ENTER> palataksesi alkuun", 200, 300);
     }
     

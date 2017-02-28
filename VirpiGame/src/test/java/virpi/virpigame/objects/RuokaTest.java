@@ -24,7 +24,7 @@ public class RuokaTest {
 
     @Before
     public void setUp() {
-        ruoka = new Ruoka("Sapuska", 100, 2, 3);
+        ruoka = new Ruoka("Sapuska", 2, 3);
     }
 
     @After
@@ -62,22 +62,7 @@ public class RuokaTest {
         ruoka.liikuVasemmalle();
         assertEquals(0, ruoka.getX());
         ruoka.liikuVasemmalle();
-        assertEquals(0, ruoka.getX());
-    }
-
-    @Test
-    public void palauttaaOikeatPisteet() {
-        assertEquals(100, ruoka.getPisteet());
-    }
-
-    @Test
-    public void pisteetMuuttuvatOikeinEikäMeneNegatiiviseksi() {
-        ruoka.muutaPisteita(300);
-        assertEquals(400, ruoka.getPisteet());
-        ruoka.muutaPisteita(-500);
-        assertEquals(0, ruoka.getPisteet());
-        ruoka.muutaPisteita(-1);
-        assertEquals(0, ruoka.getPisteet());
+        assertEquals(-1, ruoka.getX());
     }
 
     @Test
