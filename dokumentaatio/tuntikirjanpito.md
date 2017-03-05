@@ -14,3 +14,8 @@ Päivä | Tunnit | Kuvaus
 22.02.2017 | 4h | Epämääräistä suunnittelua ja tutoriaalien ihmettelyä
 23.02.2017 | 4h | Näytön refresh uusiksi ja muuta
 24.02.2017 | 3h | Dokumentaatiota yms
+27.02.2071 | 3h | Ideoiden ja koodin pyörittelyä
+28.02.2017 |10h | Pelilogiikkaa paljon uusiksi siten, että toimii järkevämmin GUI:n kanssa
+29.02.2071 | 3h | Ideoiden ja koodin pyörittelyä
+30.02.2017 | 3h | Ideoiden ja koodin pyörittelyä
+05.03.2017 | 8h | Viimeistelyä ohjelmaan, testeihin, dokumentatioon
