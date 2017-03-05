@@ -38,7 +38,7 @@ public class PeliTest {
 
     @Test
     public void konstruktoriAsettiOikeatKoordinaatit() {
-        assertEquals(10, peli.getY());
+        assertEquals(9, peli.getY());
         assertEquals(1220, peli.getX());
     }
 
@@ -50,7 +50,7 @@ public class PeliTest {
     @Test
     public void kaikkiMuuttujatOikeissaAloitusarvoissa() {
         assertEquals(0, peli.getPisteet());
-        assertEquals(5, peli.getElamat());
+        assertEquals(3, peli.getElamat());
         assertEquals(0, peli.getLaskuri());
         assertEquals(1, peli.getTaso());
         assertEquals(Pelitila.ALKURUUTU, peli.getTila());

@@ -163,11 +163,6 @@ public class Kartta {
             return false;
         }
         return true;
-//        if (x <= maxX && x >= 0 && y <= maxY && y >= 0) {
-//            return true;
-//        } else {
-//            return false;
-//        }
     }
 
     /**

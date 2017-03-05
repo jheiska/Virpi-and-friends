@@ -17,13 +17,12 @@ public class Peli {
 
     /**
      * Konstruktorissa asetetaan pelialueen mitat. Hieman isompi x-akseli kuin
-     * peliruudussa, jotta objektit rullailevat ruudulle kivasti oikeasta
-     * laidasta.
+     * peliruudussa, jotta objektit rullailevat ruudulle oikeasta laidasta.
      *
      */
     public Peli() {
         this.x = 1220;
-        this.y = 10;
+        this.y = 9;
     }
 
     /**
@@ -64,8 +63,7 @@ public class Peli {
     }
 
     /**
-     * Lisätään liikkuvia riippuen laskurista. Mitä isompi taso, sitä enemmän
-     * koiria.
+     * Lisätään liikkuvia riippuen laskurista. Mitä isompi taso, sitä enemmän koiria.   
      */
     public void lisaaLiikkuvia() {
         if (laskuri == 45 || laskuri == 135) {
@@ -185,10 +183,10 @@ public class Peli {
     public void setTila(Pelitila tila) {
         this.tila = tila;
     }
-    
+
     public Pelitila getTila() {
         return this.tila;
-    }    
+    }
 
     public int getX() {
         return x;
