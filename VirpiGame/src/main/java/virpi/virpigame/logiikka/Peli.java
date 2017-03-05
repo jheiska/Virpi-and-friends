@@ -17,7 +17,8 @@ public class Peli {
 
     /**
      * Konstruktorissa asetetaan pelialueen mitat. Hieman isompi x-akseli kuin
-     * peliruudussa, jotta objektit rullailevat ruudulle kivasti oikeasta laidasta.
+     * peliruudussa, jotta objektit rullailevat ruudulle kivasti oikeasta
+     * laidasta.
      *
      */
     public Peli() {
@@ -27,8 +28,8 @@ public class Peli {
 
     /**
      * Pelin aloituskomento luo uuden Kartta-olion konstruktorissa annetuilla
-     * mitoilla. Pisteet, elämät, laskuri, taso ja pelitila asetetaan alkuarvoihinsa.
-     * Luodaan pelihahmoksi Kissa-olio ja asetetaan se karttaan.
+     * mitoilla. Pisteet, elämät, laskuri, taso ja pelitila asetetaan
+     * alkuarvoihinsa. Luodaan pelihahmoksi Kissa-olio ja asetetaan se karttaan.
      */
     public void aloita() {
         kartta = new Kartta(x, y);
@@ -43,62 +44,64 @@ public class Peli {
 
     /**
      * Päivitetään pelin tilaa. Laskuri juoksee ja päivittäjä-luokkaa kutsumalla
-     * lisätään ruokia ja koiria kentälle. Mikäli elämät loppuvat tai päästään viimeinen
-     * taso läpi, pelitilaksi LOPPURUUTU.
+     * lisätään ruokia ja koiria kentälle. Mikäli elämät loppuvat tai päästään
+     * viimeinen taso läpi, pelitilaksi LOPPURUUTU.
      */
     public void paivitaTila() {
         laskuri++;
         lisaaLiikkuvia();
         kartta.paivitaKartta();
         osuukoLiikkuvaan();
-        if (pisteet == (500 * taso)){
+        if (pisteet == (500 * taso)) {
             taso++;
         }
-        if (elamat == 0 || taso == 8) {
+        if (elamat == 0 || taso == 11) {
             tila = Pelitila.LOPPURUUTU;
         }
         if (laskuri == 181) {
             laskuri = 0;
         }
-        
     }
-    
+
     /**
-     * Lisätään liikkuvia riippuen laskurista. Mitä isompi taso, sitä enemmän koiria.
+     * Lisätään liikkuvia riippuen laskurista. Mitä isompi taso, sitä enemmän
+     * koiria.
      */
     public void lisaaLiikkuvia() {
         if (laskuri == 45 || laskuri == 135) {
             for (int i = 0; i < taso; i++) {
                 kartta.lisaaKoira();
             }
-        } else if (laskuri == 90 || laskuri == 180) {
+        }
+        if (laskuri == 90 || laskuri == 180) {
             kartta.lisaaRuoka();
         }
     }
 
     /**
-     * Mikäli jokin kartan liikkuvat-olioista on riittävän lähellä pelihahmoa, sama y-koordinaatti
-     * ja x-akselilla +/- 30. Osuman löytyessä kyseisen olion indeksi liikkuvien listassa otetaan talteen. 
-     * Sitten menetetään elämä mikäli liikkuva oli koira ja saadaan 100 pistettä mikäli se oli ruoka. 
-     * Lopuksi poistetaan kyseinen olio listalta.
+     * Mikäli jokin kartan liikkuvat-olioista on riittävän lähellä pelihahmoa,
+     * sama y-koordinaatti ja x-akselilla +/- 30. Osuman löytyessä kyseisen
+     * olion indeksi liikkuvien listassa otetaan talteen. Sitten menetetään
+     * elämä mikäli liikkuva oli koira ja saadaan 100 pistettä mikäli se oli
+     * ruoka. Lopuksi poistetaan kyseinen olio listalta.
      */
     public void osuukoLiikkuvaan() {
-        if (!kartta.getLiikkuvat().isEmpty()){         
-        int osuma = -1;
-        for (int i = 0; i < kartta.getLiikkuvat().size(); i++) {
-            Liikkuva vertailtava = kartta.getLiikkuvat().get(i);
-            if (vertailtava.getY() == pelihahmo.getY() && (vertailtava.getX() - 30) <= pelihahmo.getX() && (vertailtava.getX() + 30) >= pelihahmo.getX()) {
-                osuma = i;
+        if (!kartta.getLiikkuvat().isEmpty()) {
+            int osuma = -1;
+            for (int i = 0; i < kartta.getLiikkuvat().size(); i++) {
+                Liikkuva vertailtava = kartta.getLiikkuvat().get(i);
+                if (vertailtava.getY() == pelihahmo.getY() && (vertailtava.getX() - 30) <= pelihahmo.getX() && (vertailtava.getX() + 30) >= pelihahmo.getX()) {
+                    osuma = i;
+                }
             }
-        }
-        if (osuma > -1) {
-            if (kartta.getLiikkuvat().get(osuma).toString().equals("koira")) {
-                elamat--;
-            } else if (kartta.getLiikkuvat().get(osuma).toString().equals("ruoka")) {
-                pisteet += 100;
+            if (osuma > -1) {
+                if (kartta.getLiikkuvat().get(osuma).toString().equals("koira")) {
+                    elamat--;
+                } else if (kartta.getLiikkuvat().get(osuma).toString().equals("ruoka")) {
+                    pisteet += 100;
+                }
+                kartta.getLiikkuvat().remove(osuma);
             }
-            kartta.getLiikkuvat().remove(osuma);
-        }
         }
     }
 
@@ -117,8 +120,8 @@ public class Peli {
     }
 
     /**
-     * Hahmo liikkuu sivusuunnassa 40 askelta kerrallaan, jotta liike olisi
-     * samansuuruinen pystysuunnan kanssa.
+     * Hahmo liikkuu sivusuunnassa 20 askelta kerrallaan, jotta liike ei olisi
+     * liian hidasta.
      */
     public void liikutaVasemmalle() {
         for (int i = 0; i < 20; i++) {
@@ -147,10 +150,14 @@ public class Peli {
         return kartta.getLiikkuvat();
     }
 
+    public void setPisteet(int p) {
+        pisteet = p;
+    }
+
     public int getPisteet() {
         return pisteet;
     }
-    
+
     public void setElamat(int e) {
         elamat = e;
     }
@@ -158,30 +165,30 @@ public class Peli {
     public int getElamat() {
         return elamat;
     }
-    
+
     public void setLaskuri(int l) {
         laskuri = l;
     }
-    
+
     public int getLaskuri() {
         return laskuri;
     }
-    
+
     public void setTaso(int t) {
         taso = t;
     }
-    
+
     public int getTaso() {
         return taso;
-    }
-
-    public Pelitila getTila() {
-        return this.tila;
     }
 
     public void setTila(Pelitila tila) {
         this.tila = tila;
     }
+    
+    public Pelitila getTila() {
+        return this.tila;
+    }    
 
     public int getX() {
         return x;

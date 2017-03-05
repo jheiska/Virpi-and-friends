@@ -7,6 +7,7 @@ public class Ruoka extends Liikkuva {
     /**
      * Luodaan sapuskaa kissan syötäväksi.
      *
+     * @param nimi sapuskan nimi.
      * @param x -koordinaatti.
      * @param y -koordinaatti.
      */

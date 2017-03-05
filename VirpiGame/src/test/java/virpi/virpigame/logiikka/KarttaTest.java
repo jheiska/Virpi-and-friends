@@ -1,8 +1,5 @@
 package virpi.virpigame.logiikka;
 
-import virpi.virpigame.logiikka.Kartta;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -63,17 +60,18 @@ public class KarttaTest {
         Ruoka ruoka1 = new Ruoka("R1", 1200, 0);
         Ruoka ruoka2 = new Ruoka("R2", 0, 10);
         kartta.liikutaYlos(ruoka1);
-        assertEquals(0, ruoka1.getX());
+        assertNotEquals(-1 , ruoka1.getX());
         kartta.liikutaOikealle(ruoka1);
-        assertEquals(1200, ruoka1.getX());
+        assertNotEquals(1201, ruoka1.getX());
         kartta.liikutaAlas(ruoka2);
-        assertEquals(10, ruoka2.getX());
+        assertNotEquals(11, ruoka2.getX());
+        //paitsi vasemmalle, johon saa liikkua vapaasti ulos laudalta
         kartta.liikutaVasemmalle(ruoka2);
-        assertEquals(0, ruoka2.getX());
+        assertEquals(-1, ruoka2.getX());
     }
 
     public void sijoitusKartanUlkopuolelleEiOnnistuMuttaKarttaanOnnistuu() {
-        Ruoka ruoka1 = new Ruoka("R1", -1, -1);
+        Ruoka ruoka1 = new Ruoka("R1", 0, -1);
         Ruoka ruoka2 = new Ruoka("R2", 0, 11);
         Ruoka ruoka3 = new Ruoka("R3", 1221, 0);
         Ruoka ruoka4 = new Ruoka("R4", 1220, 11);

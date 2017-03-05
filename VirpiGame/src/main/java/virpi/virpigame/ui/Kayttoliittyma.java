@@ -38,7 +38,7 @@ public class Kayttoliittyma implements Runnable {
         frame.pack();
 
         
-        Timer timer = new Timer(13, new ActionListener() {
+        Timer timer = new Timer(10, new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
                 if (peli.getTila() == Pelitila.PELI){

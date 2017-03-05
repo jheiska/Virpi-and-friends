@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package virpi.virpigame.logiikka;
 
 import org.junit.After;
@@ -11,11 +7,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import virpi.virpigame.objects.Ruoka;
 
-/**
- *
- * @author jaakk_000
- */
+
 public class PeliTest {
 
     Peli peli;
@@ -63,30 +57,85 @@ public class PeliTest {
     }
 
     @Test
-    public void paivitysPaivittaaLaskuriaJaAsettaaLopputilan() {
+    public void paivitysPaivittaaLaskuriaJaNollaa() {
         peli.paivitaTila();
-        assertEquals(1, peli.getLaskuri());
+        assertEquals(1, peli.getLaskuri());        
+        peli.setLaskuri(180);
+        peli.paivitaTila();
+        assertEquals(0, peli.getLaskuri());
+    }
+    
+    @Test 
+        public void lopputilaJosElamatLoppuu() {
         peli.setElamat(0);
+        peli.paivitaTila();
+        assertEquals(Pelitila.LOPPURUUTU, peli.getTila());
+    }
+    
+    @Test
+    public void lopputilaJosTasoYli10() {
+        peli.setTaso(11);
         peli.paivitaTila();
         assertEquals(Pelitila.LOPPURUUTU, peli.getTila());
     }
 
     @Test
-    public void paivitysLisaaRuokiaJaKoiriaJaNollaaLaskurin() {
-        peli.setLaskuri(44);
-        peli.paivitaTila();
-        assertEquals(1, peli.getKartta().getLiikkuvat().size());
-        peli.setLaskuri(134);
-        peli.paivitaTila();
-        assertEquals(2, peli.getKartta().getLiikkuvat().size());
-        peli.setLaskuri(89);
-        peli.paivitaTila();
-        assertEquals(3, peli.getKartta().getLiikkuvat().size());
+    public void paivitysLisaaLiikkuvan() {
         peli.setLaskuri(179);
         peli.paivitaTila();
-        assertEquals(4, peli.getKartta().getLiikkuvat().size());
+        assertEquals(1, peli.getKartta().getLiikkuvat().size());
+    }
+    
+    @Test
+    public void liikkuvienLisaysToimii() {
+        peli.setLaskuri(45);
+        peli.lisaaLiikkuvia();
+        assertEquals(1, peli.getKartta().getLiikkuvat().size());
+        peli.setLaskuri(135);
+        peli.lisaaLiikkuvia();        
+        assertEquals(2, peli.getKartta().getLiikkuvat().size());
+        peli.setLaskuri(90);
+        peli.lisaaLiikkuvia();
+        assertEquals(3, peli.getKartta().getLiikkuvat().size());
+        peli.setLaskuri(180);
+        peli.lisaaLiikkuvia();
+        assertEquals(4, peli.getKartta().getLiikkuvat().size());        
+    }
+    
+    @Test
+    public void kartanPaivitysToimii() {
+        Kartta kartta = peli.getKartta();
+        Ruoka ruoka5 = new Ruoka("R1", 1, 0);
+        kartta.lisaaLiikkuva(ruoka5);
+        Ruoka ruoka6 = new Ruoka("R2", 100, 3);
+        kartta.lisaaLiikkuva(ruoka6);
+
+        assertEquals(1, kartta.getLiikkuvat().get(0).getX());
+        assertEquals(100, kartta.getLiikkuvat().get(1).getX());
+        kartta.paivitaKartta();
+        assertEquals(0, kartta.getLiikkuvat().get(0).getX());
+        assertEquals(99, kartta.getLiikkuvat().get(1).getX());
+        kartta.paivitaKartta();
+        assertEquals(-1, kartta.getLiikkuvat().get(0).getX());
+        assertEquals(98, kartta.getLiikkuvat().get(1).getX());
+    }
+    
+    @Test
+    public void tasoVaihtuuJosTarpeeksiPisteita() {
+        assertEquals(1, peli.getTaso());
+        peli.setPisteet(500);
         peli.paivitaTila();
-        assertEquals(0, peli.getLaskuri());
+        assertEquals(2, peli.getTaso());        
+    }
+    
+    @Test
+    public void josOsuuRuokaanNiinSaaPisteita() {
+        Ruoka ruoka = new Ruoka("R1", 10, 5);
+        peli.getKartta().lisaaLiikkuva(ruoka);
+        assertEquals(ruoka, peli.getKartta().getLiikkuvat().get(0));
+        peli.paivitaTila();
+        assertEquals(100, peli.getPisteet());
+        assertEquals(true, peli.getKartta().getLiikkuvat().isEmpty());
     }
 
     @Test

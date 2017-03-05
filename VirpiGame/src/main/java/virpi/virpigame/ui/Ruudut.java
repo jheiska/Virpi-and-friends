@@ -47,9 +47,9 @@ public class Ruudut {
         Font ohjefontti = new Font("Comic Sans MS", Font.BOLD, 15);
         g.setFont(ohjefontti);
         g.setColor(Color.BLACK);
-        g.drawString("Ohjaa pelihahmoa eli mustaa palloa nuolinäppäimillä tai WASD.", 200, 150);
-        g.drawString("Neliöitä pitää varoa, niistä menettää elämiä ja jos elämät loppuvat, pelikin loppuu.", 200, 180);
-        g.drawString("Palloja keräämällä saat pisteitä.", 200, 210);
+        g.drawString("Ohjaa pelihahmoa eli mustaa kissaa nuolinäppäimillä tai WASD.", 200, 150);
+        g.drawString("Varo vihaisia koiria, niistä menettää elämiä ja jos elämät loppuvat, pelikin loppuu.", 200, 180);
+        g.drawString("Hiiriä keräämällä saat pisteitä. Peli vaikeutuu koko ajan.", 200, 210);
         g.drawString("Paina <ENTER> palataksesi alkuun", 200, 300);
     }
     

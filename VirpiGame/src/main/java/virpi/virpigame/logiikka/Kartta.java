@@ -33,37 +33,34 @@ public class Kartta {
     }
 
     /**
-     * Lisätään listaan jokin olio, mikäli se ei olisi menossa pelihahmon päälle
-     * eikä koordinaatiston ulkopuolelle.
+     * Lisätään listaan jokin olio, mikäli se ei olisi menossa koordinaatiston
+     * ulkopuolelle.
      *
      * @param asia on ruudukkoon lisättävä olio
      */
     public void lisaaLiikkuva(Liikkuva asia) {
-        if (asia.getX() != virpi.getX() && asia.getY() != virpi.getY()) {
-            if (mahtuukoRuudukkoon(asia)) {
-                liikkuvat.add(asia);
-            }
+        if (mahtuukoRuudukkoon(asia)) {
+            liikkuvat.add(asia);
         }
     }
-    
+
     /**
      * Lisätään koira satunnaiselle kaistalle.
      */
-    public void lisaaKoira(){
+    public void lisaaKoira() {
         Random random = new Random();
         int y = random.nextInt(10);
-        lisaaLiikkuva(new Koira("Hauva", maxX, y));        
+        lisaaLiikkuva(new Koira("Hauva", maxX, y));
     }
-    
+
     /**
      * Lisätään ruoka satunnaiselle kaistalle.
      */
-    public void lisaaRuoka(){
+    public void lisaaRuoka() {
         Random random = new Random();
         int y = random.nextInt(10);
         lisaaLiikkuva(new Ruoka("Herkku", maxX, y));
     }
-    
 
     /**
      * Kaikissa liikuttelukomennoissa tarkistetaan ensin, ettei olla menossa
@@ -111,7 +108,7 @@ public class Kartta {
      * @param asia on Liikkuva jota liikutetaan.
      */
     public void liikutaOikealle(Liikkuva asia) {
-        if (asia.getX() + 1 < maxX) {
+        if (asia.getX() < maxX) {
             asia.liikuOikealle();
         }
     }
@@ -139,7 +136,7 @@ public class Kartta {
      *
      */
     public void liikutaHahmoaVasemmalle() {
-        if (virpi.getX() >= 0){
+        if (virpi.getX() >= 0) {
             this.liikutaVasemmalle(virpi);
         }
     }
@@ -153,18 +150,31 @@ public class Kartta {
     public boolean mahtuukoRuudukkoon(Liikkuva asia) {
         int x = asia.getX();
         int y = asia.getY();
-        if (x <= maxX && x >= 0 && y <= maxY && y >= 0) {
-            return true;
-        } else {
+        if (x < 0) {
             return false;
         }
+        if (y < 0) {
+            return false;
+        }
+        if (x > maxX) {
+            return false;
+        }
+        if (y > maxY) {
+            return false;
+        }
+        return true;
+//        if (x <= maxX && x >= 0 && y <= maxY && y >= 0) {
+//            return true;
+//        } else {
+//            return false;
+//        }
     }
 
     /**
      * Siirretään kaikkia liikkuvia pykälä vasemmalle. Poistetaan jos menee
      * vasemmalta ulos.
      */
-    public void paivitaKartta() {        
+    public void paivitaKartta() {
         for (Liikkuva liikkuva : liikkuvat) {
             liikutaVasemmalle(liikkuva);
         }

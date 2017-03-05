@@ -1,12 +1,16 @@
 package virpi.virpigame.objects;
 
-import java.awt.Color;
-
 public abstract class Liikkuva {
 
     private int x;
     private int y;
 
+    /**
+     * Luodaan Liikkuva-olio.
+     *
+     * @param x x-koordinaatti.
+     * @param y y-koordinaatti.
+     */
     public Liikkuva(int x, int y) {
         this.x = x;
         this.y = y;
