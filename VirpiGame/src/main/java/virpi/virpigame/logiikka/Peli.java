@@ -34,7 +34,7 @@ public class Peli {
     public void aloita() {
         kartta = new Kartta(x, y);
         pisteet = 0;
-        elamat = 5;
+        elamat = 3;
         laskuri = 0;
         taso = 1;
         tila = Pelitila.ALKURUUTU;
