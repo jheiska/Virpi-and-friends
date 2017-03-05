@@ -22,7 +22,7 @@ Piirtäjä hakee objektien sijainnit Peliltä ja piirtelee kuvia niiden mukaises
 **Sekvenssikaaviot:**
 
 ![Sekvenssikaavio1](Sekvenssikaavio hahmonliikutuskomennosta.png)
-![Sekvenssikaavio2|(sekvenssikaavio koiranlisaystoiminnosta.png)
+![Sekvenssikaavio2](sekvenssikaavio koiranlisaystoiminnosta.png)
 
 **Käyttöohjeet:** Kun käynnistät pelin, aukeaa aloitusruutu, josta pääsee peliin painamalla enter, tai lukemaan peliohjeet painamalla space. Pelihahmona toimii musta kissa, jota liikutellaan joko WASD- tai nuolinäppäimillä. 
 Ruudulle ilmaantuu hiiriä ja koiria - hiiristä saa pisteitä ja koirista menettää elämiä. Aina kun 500 pistettä tulee täyteen, peli vaikeutuu hieman siten, että koiria ilmestyy enemmän.
