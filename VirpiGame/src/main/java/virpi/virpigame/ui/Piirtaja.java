@@ -2,7 +2,12 @@ package virpi.virpigame.ui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import virpi.virpigame.logiikka.*;
 import virpi.virpigame.objects.*;
@@ -11,7 +16,6 @@ public class Piirtaja extends JPanel {
 
     private Peli peli;
     private Ruudut ruudut;
-
 
     Piirtaja(Peli peli) {
         this.peli = peli;
@@ -22,7 +26,7 @@ public class Piirtaja extends JPanel {
         g.setColor(Color.green);
         g.fillRect(0, 0, 1200, 480);
         if (peli.getTila().equals(Pelitila.PELI)) {
-            piirraOliot(g);
+            piirraOliot(g);            
             ruudut.piirraPisteet(g);
         } else if (peli.getTila().equals(Pelitila.ALKURUUTU)) {
             ruudut.piirraAlkuruutu(g);
@@ -35,17 +39,30 @@ public class Piirtaja extends JPanel {
 
     private void piirraOliot(Graphics g) {
         for (Liikkuva piirrettava : peli.getLiikkuvat()) {
-            if (piirrettava.toString().equals("ruoka")){
+            if (piirrettava.toString().equals("ruoka")) {
                 g.setColor(Color.WHITE);
                 g.fillOval(piirrettava.getX(), piirrettava.getY() * 40, 40, 40);
             }
-            if (piirrettava.toString().equals("koira")){
+            if (piirrettava.toString().equals("koira")) {
                 g.setColor(Color.RED);
                 g.fillRect(piirrettava.getX(), piirrettava.getY() * 40, 40, 40);
             }
         }
-        g.setColor(Color.BLACK);
-        g.fillOval(peli.getPelihahmo().getX(), (peli.getPelihahmo().getY() * 40), 40, 40);
+        
+            BufferedImage pelihahmo = LoadImage("Virpi.png");
+            g.drawImage(pelihahmo, peli.getPelihahmo().getX(), (peli.getPelihahmo().getY() * 40), null);
+//        g.setColor(Color.BLACK);
+//        g.fillOval(peli.getPelihahmo().getX(), (peli.getPelihahmo().getY() * 40), 40, 40);
+    }
+
+    BufferedImage LoadImage(String filename) {
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File(filename));
+        } catch (IOException e) {
+
+        }
+        return img;
     }
 
 }
