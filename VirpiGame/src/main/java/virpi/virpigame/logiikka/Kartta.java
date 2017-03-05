@@ -51,8 +51,8 @@ public class Kartta {
      */
     public void lisaaKoira(){
         Random random = new Random();
-        int y = random.nextInt(maxY - 1);
-        lisaaLiikkuva(new Koira("Hauva", maxX, y));
+        int y = random.nextInt(10);
+        lisaaLiikkuva(new Koira("Hauva", maxX, y));        
     }
     
     /**
@@ -60,7 +60,7 @@ public class Kartta {
      */
     public void lisaaRuoka(){
         Random random = new Random();
-        int y = random.nextInt(maxY - 1);
+        int y = random.nextInt(10);
         lisaaLiikkuva(new Ruoka("Herkku", maxX, y));
     }
     

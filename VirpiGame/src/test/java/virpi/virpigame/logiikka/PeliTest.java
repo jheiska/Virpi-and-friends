@@ -58,6 +58,7 @@ public class PeliTest {
         assertEquals(0, peli.getPisteet());
         assertEquals(5, peli.getElamat());
         assertEquals(0, peli.getLaskuri());
+        assertEquals(1, peli.getTaso());
         assertEquals(Pelitila.ALKURUUTU, peli.getTila());
     }
 
@@ -74,19 +75,20 @@ public class PeliTest {
     public void paivitysLisaaRuokiaJaKoiriaJaNollaaLaskurin() {
         peli.setLaskuri(44);
         peli.paivitaTila();
-        assertEquals("koira", peli.getKartta().getLiikkuvat().get(0).toString());
+        assertEquals(1, peli.getKartta().getLiikkuvat().size());
         peli.setLaskuri(134);
         peli.paivitaTila();
-        assertEquals("koira", peli.getKartta().getLiikkuvat().get(1).toString());
+        assertEquals(2, peli.getKartta().getLiikkuvat().size());
         peli.setLaskuri(89);
         peli.paivitaTila();
-        assertEquals("ruoka", peli.getKartta().getLiikkuvat().get(2).toString());
+        assertEquals(3, peli.getKartta().getLiikkuvat().size());
         peli.setLaskuri(179);
         peli.paivitaTila();
-        assertEquals("ruoka", peli.getKartta().getLiikkuvat().get(3).toString());
+        assertEquals(4, peli.getKartta().getLiikkuvat().size());
+        peli.paivitaTila();
         assertEquals(0, peli.getLaskuri());
     }
-    
+
     @Test
     public void liikutteluToimii() {
         peli.liikutaOikealle();
@@ -97,6 +99,12 @@ public class PeliTest {
         assertEquals(4, peli.getPelihahmo().getY());
         peli.liikutaAlas();
         assertEquals(5, peli.getPelihahmo().getY());
+    }
+
+    @Test
+    public void tilanAsetusToimii() {
+        peli.setTila(Pelitila.PELI);
+        assertEquals(Pelitila.PELI, peli.getTila());
     }
 
 }
