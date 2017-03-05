@@ -5,7 +5,7 @@ import java.awt.Color;
 public abstract class Liikkuva {
 
     private int x;
-    int y;
+    private int y;
 
     public Liikkuva(int x, int y) {
         this.x = x;

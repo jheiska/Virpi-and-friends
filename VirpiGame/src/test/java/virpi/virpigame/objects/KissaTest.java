@@ -72,5 +72,10 @@ public class KissaTest {
     public void palauttaaOikeanYKoordinaatin() {
         assertEquals(2, kissa.getY());
     }
+    
+    @Test
+    public void palauttaaOikeanToStringin(){
+        assertEquals("kissa", kissa.toString());
+    }
 
 }

@@ -74,9 +74,14 @@ public class RuokaTest {
     public void palauttaaOikeanYKoordinaatin() {
         assertEquals(3, ruoka.getY());
     }
-
+    
     @Test
-    public void toStringPalauttaaOikeanNimen() {
-        assertEquals("Sapuska", ruoka.toString());
+    public void palauttaaOikeanNimen(){
+        assertEquals("Sapuska", ruoka.getNimi());
+    }
+    
+    @Test
+    public void toStringPalauttaaOikeanSanan() {
+        assertEquals("ruoka", ruoka.toString());
     }
 }

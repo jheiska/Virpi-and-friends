@@ -19,7 +19,7 @@ public class Kartta {
      */
     public Kartta(int maxX, int maxY) {
         liikkuvat = new ArrayList<Liikkuva>();
-        this.maxX = maxX + 20;
+        this.maxX = maxX;
         this.maxY = maxY;
     }
 
@@ -51,7 +51,7 @@ public class Kartta {
      */
     public void lisaaKoira(){
         Random random = new Random();
-        int y = random.nextInt(maxY);
+        int y = random.nextInt(maxY - 1);
         lisaaLiikkuva(new Koira("Hauva", maxX, y));
     }
     
@@ -60,7 +60,7 @@ public class Kartta {
      */
     public void lisaaRuoka(){
         Random random = new Random();
-        int y = random.nextInt(maxY);
+        int y = random.nextInt(maxY - 1);
         lisaaLiikkuva(new Ruoka("Herkku", maxX, y));
     }
     

@@ -73,6 +73,15 @@ public class KoiraTest {
     public void palauttaaOikeanYKoordinaatin() {
         assertEquals(2, koira.getY());
     }
+    
+    @Test
+    public void palauttaaOikeanNimen() {
+        assertEquals("hauva", koira.getNimi());
+    }
 
+    @Test
+    public void palauttaaOikeanToStringin() {
+        assertEquals("koira", koira.toString());
+    }
 
 }

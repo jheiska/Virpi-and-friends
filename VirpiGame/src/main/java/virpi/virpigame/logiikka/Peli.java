@@ -15,11 +15,12 @@ public class Peli {
     private Kissa pelihahmo;
 
     /**
-     * Konstruktorissa asetetaan pelialueen mitat.
+     * Konstruktorissa asetetaan pelialueen mitat. Hieman isompi x-akseli kuin
+     * peliruudussa, jotta objektit rullailevat ruudulle kivasti oikeasta laidasta.
      *
      */
     public Peli() {
-        this.x = 1200;
+        this.x = 1220;
         this.y = 10;
     }
 
@@ -36,14 +37,11 @@ public class Peli {
         tila = Pelitila.ALKURUUTU;
         pelihahmo = new Kissa(0, 5);
         kartta.lisaaPelihahmo(pelihahmo);
-        kartta.lisaaKoira();
-        kartta.lisaaRuoka();
     }
 
     /**
      * Päivitetään pelin tilaa. Laskuri juoksee ja tietyillä laskurin arvoilla
-     * lisätään ruokia ja koiria kentälle. Mikäli pisteet menevät miinukselle,
-     * pelitilaksi LOPPURUUTU.
+     * lisätään ruokia ja koiria kentälle. Mikäli elämät loppuvat, pelitilaksi LOPPURUUTU.
      */
     public void paivitaTila() {
         laskuri++;
@@ -63,6 +61,9 @@ public class Peli {
     }
 
     public void osuukoLiikkuvaan() {
+        if (!kartta.getLiikkuvat().isEmpty()){
+            
+        
         int osuma = -1;
         for (int i = 0; i < kartta.getLiikkuvat().size(); i++) {
             Liikkuva vertailtava = kartta.getLiikkuvat().get(i);
@@ -78,7 +79,7 @@ public class Peli {
             }
             kartta.getLiikkuvat().remove(osuma);
         }
-
+        }
     }
 
     /**
@@ -100,7 +101,7 @@ public class Peli {
      * samansuuruinen pystysuunnan kanssa.
      */
     public void liikutaVasemmalle() {
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 20; i++) {
             kartta.liikutaHahmoaVasemmalle();
         }
     }
@@ -109,7 +110,7 @@ public class Peli {
      * Hahmo liikkuu.
      */
     public void liikutaOikealle() {
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 20; i++) {
             kartta.liikutaHahmoaOikealle();
         }
     }
@@ -129,9 +130,21 @@ public class Peli {
     public int getPisteet() {
         return pisteet;
     }
+    
+    public void setElamat(int e) {
+        elamat = e;
+    }
 
     public int getElamat() {
         return elamat;
+    }
+    
+    public void setLaskuri(int l) {
+        laskuri = l;
+    }
+    
+    public int getLaskuri() {
+        return laskuri;
     }
 
     public Pelitila getTila() {
